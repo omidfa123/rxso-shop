@@ -1,15 +1,38 @@
 import { extendTheme } from '@chakra-ui/react';
+import { mode } from '@chakra-ui/theme-tools';
 
 const config = {
   initialColorMode: 'light',
-  useSystemColorMode: true,
+  useSystemColorMode: false,
+};
+
+const styles = {
+  global: (props: any) => ({
+    body: {
+      fontFamily: 'body',
+      color: mode('text', 'text')(props),
+      bg: mode('background', 'background')(props),
+      lineHeight: 'base',
+    },
+    '*::placeholder': {
+      color: mode('gray.400', 'whiteAlpha.400')(props),
+    },
+    '*, *::before, &::after': {
+      borderColor: mode('gray.200', 'whiteAlpha.300')(props),
+      wordWrap: 'break-word',
+    },
+  }),
 };
 
 const semanticTokens = {
   colors: {
     text: {
-      default: '#009688',
-      _dark: '#FC1B50',
+      default: 'textprimary',
+      _dark: 'whiteAlpha.900',
+    },
+    background: {
+      default: 'bgcolor',
+      _dark: '#1A1A1A',
     },
   },
 };
@@ -31,7 +54,7 @@ const colors = {
   textprimary: '#05162F',
   textsecondary: '#1E385F',
   textdisabled: '#B6C5DC',
-  bgcolor: '#F7FAFF',
+  bgcolor: '#DDDFE5',
   bgdisabled: '#EDF1F6',
   strokecolor: '#CAD5E7',
 };
@@ -69,6 +92,7 @@ const breakpoints = {
 };
 
 const theme = extendTheme({
+  styles,
   config,
   semanticTokens,
   colors,

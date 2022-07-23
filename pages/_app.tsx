@@ -1,7 +1,7 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import theme from '../src/theme';
 import type { AppProps } from 'next/app';
-import '../styles/globals.css';
+import '../src/styles/globals.css';
 import '../styles/fonts.css';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
@@ -11,5 +11,4 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     </ChakraProvider>
   );
 };
-
 export default MyApp;
