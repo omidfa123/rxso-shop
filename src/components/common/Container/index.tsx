@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 const Conteainer = ({ children }: { children: ReactNode }) => {
   return (
     <>
-      <Box maxWidth="1440px" h="100%" mx="auto">
+      <Box maxWidth="1440px" h="100%" mx="auto" pos="relative">
         {children}
       </Box>
     </>

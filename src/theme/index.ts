@@ -56,7 +56,11 @@ const colors = {
   textdisabled: '#B6C5DC',
   bgcolor: '#DDDFE5',
   bgdisabled: '#EDF1F6',
-  strokecolor: '#CAD5E7',
+  strokecolor: '#E7EAF0',
+  iconcolor: '#CACFDB',
+  menutcolor: '#A3A8B5',
+  bordercolor: '#DBE3EF',
+  activecolor: '#1885FF',
 };
 
 const fonts = {
