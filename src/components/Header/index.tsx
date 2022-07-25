@@ -1,6 +1,6 @@
 import { Box } from '@chakra-ui/react';
 import Image from 'next/image';
-import Container from '../../common/Container';
+import Container from '../common/Container';
 import ProductMenu from '../ProductMenu';
 
 const Header = () => {
