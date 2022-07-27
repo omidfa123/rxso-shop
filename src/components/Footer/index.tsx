@@ -1,6 +1,6 @@
-import { PlusSquareIcon } from '@chakra-ui/icons';
 import { Badge, Box, Button, Flex, Text } from '@chakra-ui/react';
 import { IconAddCircle } from '../../utils/Icons';
+import CartModal from '../CartModal';
 import Container from '../common/Container';
 import Toman from '../common/Toman';
 
@@ -62,7 +62,7 @@ const Footer = () => {
                 <Text color="primary.500" fontWeight="bold" fontSize="5xl">
                   ۳۸٫۹۳۰٫۰۰۰
                 </Text>
-                <Toman />
+                <Toman bgColor="#fff" />
               </Flex>
             </Flex>
             <Flex pt={2} gap={6} alignItems="center">
@@ -90,7 +90,6 @@ const Footer = () => {
                   w={'23px'}
                   h={'23px'}
                   borderRadius="50%"
-                  // border={'1px solid #fff'}
                   display="flex"
                   pos={'absolute'}
                   alignItems="end"
@@ -103,6 +102,7 @@ const Footer = () => {
                     ۷
                   </Text>
                 </Badge>
+                <CartModal />
               </Box>
               <Button
                 w={'10.125rem'}

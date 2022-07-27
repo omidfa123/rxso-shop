@@ -1,6 +1,6 @@
 import { Flex, Box, Text } from '@chakra-ui/react';
 
-const Toman = () => {
+const Toman = ({ bgColor }: { bgColor: string }) => {
   return (
     <Flex position="relative">
       <Text
@@ -13,20 +13,20 @@ const Toman = () => {
       </Text>
       <Box
         as="span"
-        color="#A2ADBD"
+        color="#78879F"
         fontWeight="medium"
         fontSize="sm"
-        transform={'translate(5.4px, -8px)'}
+        transform={'translate(5.4px, -7px)'}
       >
         ن
       </Box>
       <Box
         w="3px"
         h=" 4.199999999999999px"
-        bgColor="#fff"
+        bgColor={bgColor}
         pos="absolute"
         left="30%"
-      ></Box>
+      />
     </Flex>
   );
 };

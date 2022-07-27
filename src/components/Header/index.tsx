@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react';
 import Image from 'next/image';
 import Container from '../common/Container';
-import ProductMenu from '../ProductMenu';
+import Slider from '../Slider';
 
 const Header = () => {
   return (
@@ -29,7 +29,7 @@ const Header = () => {
                 content: '""',
                 display: 'block',
                 width: '100%',
-                height: '146px ',
+                height: '146px',
                 backgroundColor: '#DDDFE5',
                 backgroundImage:
                   'linear-gradient(rgba(255, 255, 255, .9), rgba(255, 255, 255, .9))',
@@ -39,7 +39,7 @@ const Header = () => {
                 backdropFilter: 'blur(15px)',
               }}
             />
-            <ProductMenu />
+            <Slider />
             <Box
               top="80px"
               pos="absolute"
