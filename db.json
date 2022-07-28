@@ -1,0 +1,29 @@
+[
+  {
+    "category": "manitor",
+    "name": "مانیتور 24 اینچ ایسوس VZ249HE",
+    "en_name": "ASUS VZ249HE 23.8 Inch Display Monitor",
+    "price": 5990000,
+    "special_price": 0,
+    "thumbnail": "https://www.rixoshop.com/media/catalog/product/cache/1/thumbnail/75x75/9df78eab33525d08d6e5fb8d27136e95/5/0/50.jpg",
+    "image": "https://www.rixoshop.com/media/catalog/product/cache/1/image/265x/9df78eab33525d08d6e5fb8d27136e95/5/0/50.jpg",
+    "image2": "https://www.rixoshop.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/0/_/0_3_3.png",
+    "details": [
+      {
+        "monitor_size": "23.8 اینچ",
+        "monitor_resolution": "2560x1440پیکسل",
+        "monitor_type": "LCD",
+        "monitor_response_time": "5.5 ثانیه",
+        "monitor_weight": "0.5 کیلوگرم"
+      }
+    ]
+  },
+  {
+    "category": "manitor",
+    "name": "مانیتور گیمینگ 27 اینچ ایسوس VG278QF",
+    "en_name": "ASUS VG278QF 27 Inch Gaming Monitor",
+    "price": 8870000,
+    "special_price": 8000000,
+    "thumbnail": "https://www.rixoshop.com/media/catalog/product/cache/1/thumbnail/75x75/9df78eab33525d08d6e5fb8d27136e95/5/0/50.jpg"
+  }
+]

@@ -2,6 +2,7 @@ import { Box } from '@chakra-ui/react';
 import Image from 'next/image';
 import Container from '../common/Container';
 import Slider from '../Slider';
+import HeaderActions from './HeaderActions';
 
 const Header = () => {
   return (
@@ -21,6 +22,7 @@ const Header = () => {
               height={30}
               width={102}
             />
+            <HeaderActions />
             <Box
               mt="-10px"
               mx={'auto'}

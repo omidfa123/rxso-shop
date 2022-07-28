@@ -171,32 +171,35 @@ export const IconEyeInvisible = props => (
   </Icon>
 );
 
-export const IconMenu = props => (
+export const IconeUser = props => (
   <Icon
-    width="23"
-    height="23"
-    viewBox="0 0 23 23"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    {...props}
-  >
-    <path d="M21 18H9v-2h12v2Zm0-5H3v-2h18v2Zm0-5H9V6h12v2Z" fill="#F8F8F8" />
-  </Icon>
-);
-
-export const IconBell = props => (
-  <Icon
-    width="23"
-    height="23"
-    viewBox="0 0 23 23"
+    width="18"
+    height="19"
+    viewBox="0 0 18 19"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
     <path
-      d="M4.792 7.917v3.646a.522.522 0 0 1-.045.21L3.6 14.375h12.802l-1.148-2.602a.522.522 0 0 1-.045-.21V7.917a5.208 5.208 0 1 0-10.416 0Zm2.708 7.5H3.44a.938.938 0 0 1-.858-1.316l1.168-2.648V7.917a6.25 6.25 0 0 1 12.5 0v3.536l1.168 2.648a.937.937 0 0 1-.857 1.316H12.5v.416a2.5 2.5 0 1 1-5 0v-.416Zm3.958 0H8.542v.416a1.458 1.458 0 1 0 2.916 0v-.416Z"
-      fill="#F8F8F8"
+      d="M16.7274 17.4471C16.2716 16.1713 15.2672 15.0439 13.8701 14.2399C12.4729 13.4358 10.7611 13 9 13C7.23893 13 5.52706 13.4358 4.12991 14.2399C2.73276 15.0439 1.72839 16.1713 1.27259 17.4471"
+      stroke="#1E385F"
+      strokeWidth="2"
+      strokeLinecap="round"
     />
+    <circle
+      cx="9"
+      cy="5"
+      r="4"
+      stroke="#1E385F"
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
+  </Icon>
+);
+
+export const IconSearch = props => (
+  <Icon {...props}>
+    <path d="M456.69,421.39,362.6,327.3a173.81,173.81,0,0,0,34.84-104.58C397.44,126.38,319.06,48,222.72,48S48,126.38,48,222.72s78.38,174.72,174.72,174.72A173.81,173.81,0,0,0,327.3,362.6l94.09,94.09a25,25,0,0,0,35.3-35.3ZM97.92,222.72a124.8,124.8,0,1,1,124.8,124.8A124.95,124.95,0,0,1,97.92,222.72Z" />
   </Icon>
 );
 

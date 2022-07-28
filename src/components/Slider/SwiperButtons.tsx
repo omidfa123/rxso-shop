@@ -26,7 +26,7 @@ export const SwiperButtonNext = () => {
       _focus={{
         outline: 'none',
       }}
-      onClick={() => swiper.slideNext()}
+      onClick={() => swiper.slidePrev()}
     />
   );
 };
@@ -57,7 +57,7 @@ export const SwiperButtonPrev = () => {
       _focus={{
         outline: 'none',
       }}
-      onClick={() => swiper.slidePrev()}
+      onClick={() => swiper.slideNext()}
     />
   );
 };
