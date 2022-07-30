@@ -19,11 +19,21 @@
     ]
   },
   {
-    "category": "manitor",
-    "name": "مانیتور گیمینگ 27 اینچ ایسوس VG278QF",
-    "en_name": "ASUS VG278QF 27 Inch Gaming Monitor",
-    "price": 8870000,
-    "special_price": 8000000,
-    "thumbnail": "https://www.rixoshop.com/media/catalog/product/cache/1/thumbnail/75x75/9df78eab33525d08d6e5fb8d27136e95/5/0/50.jpg"
+    "category": "case",
+    "name": "کیس اوست GT-AV08-BG",
+    "englishName": "Awest GT-AV08-BG computer Case",
+    "price": 2980000,
+    "special_price": 0,
+    "thumbnail": "https://www.rixoshop.com/media/catalog/product/cache/1/thumbnail/75x75/9df78eab33525d08d6e5fb8d27136e95/1/0/10_66.png",
+    "image": "https://www.rixoshop.com/media/catalog/product/cache/1/image/265x/9df78eab33525d08d6e5fb8d27136e95/1/0/10_66.png",
+    "image2": "https://www.rixoshop.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/1/0/10_66.png",
+    "details": [
+      {
+        "case_size": "L/XL",
+        "case_type": "مرکب",
+        "case_weight": "0.5 کیلوگرم",
+        "case_cart_size": "395 میلی‌متر"
+      }
+    ]
   }
 ]

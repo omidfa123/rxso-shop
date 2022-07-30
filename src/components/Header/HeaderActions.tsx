@@ -16,11 +16,17 @@ import {
   TabPanels,
   Tab,
   TabPanel,
+  InputGroup,
+  InputRightAddon,
+  Input,
 } from '@chakra-ui/react';
 import { useState } from 'react';
+import useStore from '../../stores/products';
 
 const HeaderActions = () => {
+  const store = useStore();
   const [isOpen, setIsOpen] = useState(false);
+  const [search, setSearch] = useState('');
   return (
     <>
       <Flex pos="absolute" left="0" top="0" zIndex="banner" gap={'12px'}>
@@ -43,36 +49,27 @@ const HeaderActions = () => {
           aria-label="جستجو"
           variant="ghost"
           opacity={0.8}
+          onClick={() => setIsOpen(true)}
         />
       </Flex>
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <ModalOverlay />
-        <ModalContent>
-          <ModalCloseButton />
+        <ModalContent pt={4}>
           <ModalBody>
-            <Tabs isFitted>
-              <TabList>
-                <Tab>One</Tab>
-                <Tab>Two</Tab>
-                <Tab>Three</Tab>
-              </TabList>
-
-              <TabPanels>
-                <TabPanel>
-                  <p>one!</p>
-                </TabPanel>
-                <TabPanel>
-                  <p>two!</p>
-                </TabPanel>
-                <TabPanel>
-                  <p>three!</p>
-                </TabPanel>
-              </TabPanels>
-            </Tabs>
+            <InputGroup>
+              <InputRightAddon children={<Search2Icon />} />
+              <Input
+                value={search}
+                onChange={e => {
+                  setSearch(e.target.value);
+                  store.searchProducts(e.target.value);
+                }}
+                placeholder="دنبال چه محصولی میگردی؟"
+              />
+            </InputGroup>
           </ModalBody>
           <ModalFooter>
-            <Button mr={4}>ورود</Button>
-            <Button>ثبت‌نام</Button>
+            <Button onClick={() => setIsOpen(false)}>بستن</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

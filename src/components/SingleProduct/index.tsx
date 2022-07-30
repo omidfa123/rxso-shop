@@ -11,9 +11,12 @@ import {
 import Image from 'next/image';
 import { useState } from 'react';
 import Price from '../Price';
+import useStore from '../../stores/products';
 
 const SingleProduct = () => {
+  const store = useStore();
   const [selected, setSelected] = useState('1');
+
   return (
     <Flex
       bgColor="#F2F6FB"
@@ -30,9 +33,9 @@ const SingleProduct = () => {
         flexDir="column"
         pos="-webkit-sticky"
       >
-        <Box textAlign="center" flexBasis="220px">
+        <Box textAlign="center" flexBasis="250px">
           <Text fontWeight="semibold" fontSize="1rem">
-            کارت گرافیک انویدیاRTX2080
+            {store.singleProduct.name}
           </Text>
           <Text
             fontWeight="regular"
@@ -40,21 +43,27 @@ const SingleProduct = () => {
             color="textsecondary"
             opacity=".6"
           >
-            NVIDIA GeForce RTX 2080 Ti Founders Edition
+            {store.singleProduct.englishName}
           </Text>
         </Box>
-        <Box blendMode={'multiply'} pos="absolute" top="10%">
+        <Box
+          blendMode={'multiply'}
+          pos="absolute"
+          top="16%"
+          w={'245px'}
+          height={'245px'}
+        >
           <Image
-            src="/assets/img/cart.jpg"
-            alt="cart"
-            // layout="responsive"
-            height={296}
-            width={245}
+            src={store.singleProduct.image2}
+            alt={store.singleProduct.name}
+            layout="fill"
+            placeholder="blur"
+            blurDataURL={store.singleProduct.image2}
           />
         </Box>
-        <Text color="#879DBF" fontSize="sm" fontWeight="regular" mb="18px">
+        {/* <Text color="#879DBF" fontSize="sm" fontWeight="regular" mb="18px">
           RXS-8206985
-        </Text>
+        </Text> */}
       </Flex>
       <Divider mb="18px" />
       <Flex

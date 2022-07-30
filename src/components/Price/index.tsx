@@ -1,7 +1,8 @@
 import { Badge, Flex, Text } from '@chakra-ui/react';
 import Toman from '../common/Toman';
-
+import useStore from '../../stores/products';
 const Price = () => {
+  const store = useStore();
   return (
     <Flex direction="column" gap={2}>
       <Flex gap={2}>
@@ -31,7 +32,7 @@ const Price = () => {
       </Flex>
       <Flex gap={1} alignItems="center">
         <Text color="primary.500" fontWeight="bold" fontSize="3xl">
-          ۱۸٫۵۸۰٫۰۰۰
+          {store.singleProduct.price.toLocaleString('fa-IR').replace(/٬/g, '٫')}
         </Text>
         <Toman bgColor="#F2F6FB" />
       </Flex>

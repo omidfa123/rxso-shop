@@ -18,7 +18,7 @@ const CartModal = () => {
         <ModalHeader>سبد خرید</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <Box>omidfaadvvvvvvvvvvvvvvvvvvvvvvvvvvv</Box>
+          <Box>محصولات</Box>
         </ModalBody>
         <ModalFooter>
           <Button colorScheme="primary">تایید</Button>

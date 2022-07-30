@@ -3,17 +3,38 @@ import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Mousewheel } from 'swiper';
 import { useState } from 'react';
-
+import useStore from '../../stores/products';
 //
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
 import { SwiperButtonNext, SwiperButtonPrev } from './SwiperButtons';
 
+type SwiperProps = {
+  children: React.ReactNode;
+  slidesPerView?: number;
+  spaceBetween?: number;
+  loop?: boolean;
+  autoplay?: boolean;
+  speed?: number;
+  pagination?: boolean;
+  navigation?: boolean;
+  scrollbar?: boolean;
+  mousewheel?: boolean;
+
+  slideTo: (index: number) => void;
+};
+
 const Slider = () => {
+  const store = useStore();
   const [activeSlide, setActiveSlide] = useState(0);
-  const [prevSlide, setPrevSlide] = useState(0);
-  const [nextSlide, setNextSlide] = useState(0);
+  const [swiper, setSwiper] = useState<SwiperProps>();
+
+  const handleClick = (slide: number, category: string) => {
+    swiper?.slideTo(slide);
+    store.categoryProducts(category);
+  };
+
   return (
     <Box
       zIndex={1}
@@ -31,19 +52,24 @@ const Slider = () => {
           spaceBetween={22}
           slidesPerView={7}
           loop={true}
+          onSwiper={(swiper: any) => {
+            setSwiper(swiper);
+          }}
           onSlideChange={s => {
             const indexCurrentSlide = s.activeIndex;
             setActiveSlide(indexCurrentSlide);
             console.log(indexCurrentSlide);
-            setNextSlide(indexCurrentSlide + 1);
-            setPrevSlide(indexCurrentSlide - 1);
           }}
           initialSlide={3}
         >
           <SwiperButtonNext />
           <SwiperButtonPrev />
 
-          <SwiperSlide>
+          <SwiperSlide
+            onClick={() => {
+              handleClick(7, 'motherboard');
+            }}
+          >
             <>
               <Center flexDir="column" gap={3}>
                 <IconButton
@@ -90,7 +116,11 @@ const Slider = () => {
               </Center>
             </>
           </SwiperSlide>
-          <SwiperSlide>
+          <SwiperSlide
+            onClick={() => {
+              handleClick(8, 'ram');
+            }}
+          >
             <Center flexDir="column" gap={3}>
               <IconButton
                 aria-label={'خرید مانیتور'}
@@ -122,7 +152,7 @@ const Slider = () => {
               </Text>
             </Center>
           </SwiperSlide>
-          <SwiperSlide>
+          <SwiperSlide onClick={() => handleClick(9, 'hard')}>
             <Center flexDir="column" gap={3}>
               <IconButton
                 aria-label={'خرید مانیتور'}
@@ -154,7 +184,11 @@ const Slider = () => {
               </Text>
             </Center>
           </SwiperSlide>
-          <SwiperSlide>
+          <SwiperSlide
+            onClick={() => {
+              handleClick(10, 'fan');
+            }}
+          >
             <Center flexDir="column" gap={3}>
               <IconButton
                 aria-label={'خرید مانیتور'}
@@ -182,7 +216,7 @@ const Slider = () => {
               </Text>
             </Center>
           </SwiperSlide>
-          <SwiperSlide>
+          <SwiperSlide onClick={() => handleClick(11, 'ssd')}>
             <Center flexDir="column" gap={3}>
               <IconButton
                 aria-label={'خرید مانیتور'}
@@ -210,7 +244,7 @@ const Slider = () => {
               </Text>
             </Center>
           </SwiperSlide>
-          <SwiperSlide>
+          <SwiperSlide onClick={() => handleClick(12, 'case')}>
             <Center flexDir="column" gap={3}>
               <IconButton
                 aria-label={'خرید مانیتور'}
@@ -238,7 +272,7 @@ const Slider = () => {
               </Text>
             </Center>
           </SwiperSlide>
-          <SwiperSlide>
+          <SwiperSlide onClick={() => handleClick(6, 'manitor')}>
             <Center flexDir="column" gap={3}>
               <IconButton
                 aria-label={'خرید مانیتور'}

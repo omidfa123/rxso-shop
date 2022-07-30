@@ -1,6 +1,6 @@
-import dbConnect from '../../src/utils/dbConnect';
-import Products from '../../src/server/models/products.model';
-import { productExists } from '../../src/server/services/products.services';
+import dbConnect from '../../../src/utils/dbConnect';
+import Products from '../../../src/server/models/products.model';
+import { productExists } from '../../../src/server/services/products.services';
 import { NextApiResponse, NextApiRequest } from 'next';
 
 dbConnect();
