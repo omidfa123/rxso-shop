@@ -8,7 +8,6 @@ dbConnect();
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;
   const body = req.body;
-  console.log(body);
   switch (method) {
     case 'GET':
       try {

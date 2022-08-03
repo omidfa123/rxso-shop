@@ -7,51 +7,57 @@ import {
   ModalContent,
   ModalFooter,
   ModalBody,
-  ModalCloseButton,
   Button,
   Flex,
   IconButton,
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
   InputGroup,
   InputRightAddon,
   Input,
+  Tooltip,
+  Box,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import useStore from '../../stores/products';
-
+import { useRouter } from 'next/router';
 const HeaderActions = () => {
+  const router = useRouter();
   const store = useStore();
   const [isOpen, setIsOpen] = useState(false);
   const [search, setSearch] = useState('');
   return (
     <>
-      <Flex pos="absolute" left="0" top="0" zIndex="banner" gap={'12px'}>
+      <Box pos="absolute" left="0" top="0" zIndex="banner">
         <DarkModeSwitch />
-        <IconButton
-          borderRadius="full"
-          w="42px"
-          h="42px"
-          icon={<IconeUser />}
-          aria-label="ثبتنام یا ورود"
-          variant="ghost"
-          opacity={0.8}
-          onClick={() => setIsOpen(true)}
-        />
-        <IconButton
-          borderRadius="full"
-          w="42px"
-          h="42px"
-          icon={<Search2Icon color="#1E385F" boxSize={4} />}
-          aria-label="جستجو"
-          variant="ghost"
-          opacity={0.8}
-          onClick={() => setIsOpen(true)}
-        />
-      </Flex>
+        <Tooltip label="ناحیه کاربری" offset={[0, 13]}>
+          <span>
+            <IconButton
+              isRound
+              w="42px"
+              h="42px"
+              icon={<IconeUser />}
+              aria-label="ثبتنام یا ورود"
+              variant="ghost"
+              opacity={0.8}
+              onClick={() => router.push('/login')}
+              mx="3"
+            />
+          </span>
+        </Tooltip>
+        <Tooltip label="جستجو" offset={[0, 13]}>
+          <span>
+            <IconButton
+              isRound
+              w="42px"
+              h="42px"
+              icon={<Search2Icon color="#1E385F" boxSize={4} />}
+              aria-label="جستجو"
+              variant="ghost"
+              opacity={0.8}
+              onClick={() => setIsOpen(true)}
+            />
+          </span>
+        </Tooltip>
+      </Box>
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <ModalOverlay />
         <ModalContent pt={4}>

@@ -13,7 +13,7 @@ import {
 import { useState } from 'react';
 import { IconFilter } from '../../utils/Icons';
 import Select from '../common/Select';
-import Products from '../Products';
+import Products from '../Product';
 import SingleProduct from '../SingleProduct';
 import uesStore from '../../stores/products';
 

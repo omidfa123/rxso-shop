@@ -11,7 +11,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     case 'GET':
       try {
         const query = req.query;
-        console.log(query);
         const products = await Products.find(query);
         res.status(200).json({ success: true, data: products });
       } catch (error) {

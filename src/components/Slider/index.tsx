@@ -58,7 +58,6 @@ const Slider = () => {
           onSlideChange={s => {
             const indexCurrentSlide = s.activeIndex;
             setActiveSlide(indexCurrentSlide);
-            console.log(indexCurrentSlide);
           }}
           initialSlide={3}
         >

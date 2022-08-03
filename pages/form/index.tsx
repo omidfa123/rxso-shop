@@ -9,6 +9,7 @@ import {
   Textarea,
 } from '@chakra-ui/react';
 import axios from 'axios';
+import { NextPage } from 'next';
 import { FormEvent, useState } from 'react';
 
 interface FormData {
@@ -23,7 +24,7 @@ interface FormData {
   details: string;
 }
 
-const Form = () => {
+const Form: NextPage = () => {
   const [formData, setFormData] = useState<FormData>({
     category: '',
     name: '',
@@ -35,8 +36,6 @@ const Form = () => {
     image2: '',
     details: '',
   });
-
-  console.log(formData);
 
   const handelSubmit = async (e: FormEvent<HTMLButtonElement>) => {
     const req = await axios.post('https://localhost:3000/api/products', {
@@ -54,7 +53,6 @@ const Form = () => {
         'https://www.rixoshop.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/0/1/01_7_7.jpg',
     });
     const { data } = req;
-    console.log(data);
     clearForm();
   };
   const clearForm = () => {

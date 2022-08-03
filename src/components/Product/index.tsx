@@ -1,9 +1,10 @@
 import { Box, Button, Divider, Flex, SimpleGrid, Text } from '@chakra-ui/react';
 import axios from 'axios';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Toman from '../common/Toman';
 import useStore from '../../stores/products';
+
 interface Iproduct {
   _id: number;
   name: string;
@@ -15,7 +16,7 @@ interface Iproduct {
   createdAt: string;
 }
 
-const Products = () => {
+const Product = () => {
   const store = useStore();
 
   const clickHandler = (id: number) => {
@@ -144,4 +145,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default Product;
