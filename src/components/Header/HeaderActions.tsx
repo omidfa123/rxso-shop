@@ -26,36 +26,32 @@ const HeaderActions = () => {
   const [search, setSearch] = useState('');
   return (
     <>
-      <Box pos="absolute" left="0" top="0" zIndex="999999999999999">
+      <Box pos="absolute" left="0" top="0">
         <DarkModeSwitch />
         <Tooltip label="ناحیه کاربری" offset={[0, 13]}>
-          <span>
-            <IconButton
-              isRound
-              w="42px"
-              h="42px"
-              icon={<IconeUser />}
-              aria-label="ثبتنام یا ورود"
-              variant="ghost"
-              opacity={0.8}
-              onClick={() => router.push('/login')}
-              mx="3"
-            />
-          </span>
+          <IconButton
+            isRound
+            w="42px"
+            h="42px"
+            icon={<IconeUser />}
+            aria-label="ثبتنام یا ورود"
+            variant="ghost"
+            opacity={0.8}
+            onClick={() => router.push('/login')}
+            mx="3"
+          />
         </Tooltip>
         <Tooltip label="جستجو" offset={[0, 13]}>
-          <span>
-            <IconButton
-              isRound
-              w="42px"
-              h="42px"
-              icon={<Search2Icon color="#1E385F" boxSize={4} />}
-              aria-label="جستجو"
-              variant="ghost"
-              opacity={0.8}
-              onClick={() => setIsOpen(true)}
-            />
-          </span>
+          <IconButton
+            isRound
+            w="42px"
+            h="42px"
+            icon={<Search2Icon color="#1E385F" boxSize={4} />}
+            aria-label="جستجو"
+            variant="ghost"
+            opacity={0.8}
+            onClick={() => setIsOpen(true)}
+          />
         </Tooltip>
       </Box>
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
@@ -63,7 +59,9 @@ const HeaderActions = () => {
         <ModalContent pt={4}>
           <ModalBody>
             <InputGroup>
-              <InputRightAddon children={<Search2Icon />} />
+              <InputRightAddon>
+                <Search2Icon />
+              </InputRightAddon>
               <Input
                 value={search}
                 onChange={e => {
