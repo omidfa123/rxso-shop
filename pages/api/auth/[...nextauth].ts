@@ -9,7 +9,7 @@ import nextAuth from 'next-auth';
 export default (req: NextApiRequest, res: NextApiResponse) =>
   NextAuth(req, res, {
     session: {
-      jwt: true,
+      strategy: 'jwt',
     },
     jwt: {
       secret: process.env.JWT_SECRET,
@@ -20,7 +20,6 @@ export default (req: NextApiRequest, res: NextApiResponse) =>
         clientSecret: process.env.GITHUB_SECRET!,
       }),
     ],
-    database: process.env.MONGO_URL,
     pages: {
       signIn: '/login',
     },
