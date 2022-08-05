@@ -88,9 +88,9 @@ const fontWeights = {
   extrabold: 800,
 };
 const breakpoints = {
-  sm: '23.5em',
-  md: '46.5em',
-  lg: '64em',
+  sm: '36em',
+  md: '58em',
+  lg: '69em',
   xl: '80em',
   '2xl': '96em',
 };

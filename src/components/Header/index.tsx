@@ -7,7 +7,7 @@ import HeaderActions from './HeaderActions';
 const Header = () => {
   return (
     <>
-      <Box as="header" h="12.375rem" mb="2.625rem">
+      <Box as="header" h="12.375rem" mb="2.625rem" zIndex="999">
         <Box
           bgImage="linear-gradient(rgba(255, 255, 255, .9)
       , rgba(255, 255, 255, .9))"

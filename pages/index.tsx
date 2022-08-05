@@ -1,8 +1,11 @@
-import type { NextPage } from 'next';
 import Head from 'next/head';
 import Footer from '../src/components/Footer';
 import Header from '../src/components/Header';
 import Main from '../src/components/Main';
+
+//
+import type { NextPage } from 'next';
+import Overlay from 'src/components/common/Overlay';
 
 const Home: NextPage = () => {
   return (
@@ -22,6 +25,7 @@ const Home: NextPage = () => {
       <Header />
       <Main />
       <Footer />
+      <Overlay />
     </>
   );
 };

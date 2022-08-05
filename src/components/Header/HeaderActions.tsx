@@ -26,7 +26,7 @@ const HeaderActions = () => {
   const [search, setSearch] = useState('');
   return (
     <>
-      <Box pos="absolute" left="0" top="0" zIndex="banner">
+      <Box pos="absolute" left="0" top="0" zIndex="999999999999999">
         <DarkModeSwitch />
         <Tooltip label="ناحیه کاربری" offset={[0, 13]}>
           <span>

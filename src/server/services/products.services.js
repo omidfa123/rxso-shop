@@ -5,3 +5,8 @@ export const productExists = async productName => {
   if (product) return true;
   return false;
 };
+
+export const getAllProducts = async () => {
+  const products = await Products.find();
+  return products;
+};

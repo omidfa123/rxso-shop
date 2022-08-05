@@ -12,11 +12,13 @@ import Image from 'next/image';
 import { useState } from 'react';
 import Price from '../Price';
 import useStore from '../../stores/products';
+import AddProduct from './AddProduct';
 
 const SingleProduct = () => {
   const store = useStore();
   const [selected, setSelected] = useState('1');
 
+  console.log(store.cart);
   return (
     <Flex
       bgColor="#F2F6FB"
@@ -61,9 +63,9 @@ const SingleProduct = () => {
             blurDataURL={store.singleProduct.image2}
           />
         </Box>
-        {/* <Text color="#879DBF" fontSize="sm" fontWeight="regular" mb="18px">
+        <Text color="#879DBF" fontSize="sm" fontWeight="regular">
           RXS-8206985
-        </Text> */}
+        </Text>
       </Flex>
       <Divider mb="18px" />
       <Flex
@@ -123,12 +125,14 @@ const SingleProduct = () => {
         </Flex>
         <Button
           bgColor="secondary.500"
+          fontWeight="semibold"
+          fontSize="xl"
+          color="#fff"
+          display={store.cart.length > 0 ? 'none' : 'block'}
           _hover={{ backgroundColor: 'secondary.500' }}
           _active={{ bg: 'secondary.700' }}
         >
-          <Text fontWeight="semibold" fontSize="xl" color="#fff">
-            افزودن به لیست
-          </Text>
+          افزودن به لیست
         </Button>
       </Flex>
     </Flex>

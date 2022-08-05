@@ -30,7 +30,7 @@ const Main = () => {
         display="flex"
         flexDir={'column'}
         gap={'1.2rem'}
-        zIndex="banner"
+        zIndex="20"
         pos="relative"
       >
         <Flex gap={2}>

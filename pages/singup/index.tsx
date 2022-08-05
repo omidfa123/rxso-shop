@@ -17,8 +17,7 @@ import {
 } from '@chakra-ui/react';
 import { NextPage } from 'next';
 import * as React from 'react';
-import { PasswordField } from '../../src/components/common/PasswordField';
-import {} from '@chakra-ui/react';
+import { PasswordField } from 'src/components/common/PasswordField';
 import {
   GitHubIcon,
   GoogleIcon,
@@ -26,24 +25,25 @@ import {
 } from '../../src/components/common/ProviderIcons';
 import Image from 'next/future/image';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { signIn, useSession } from 'next-auth/react';
+import axios from 'axios';
 
-export const Login: NextPage = () => {
+export const Singup: NextPage = () => {
   const router = useRouter();
-
-  const [loginInfo, setLoginInfo] = useState({
+  const [regInfo, setRegInfo] = React.useState({
     email: '',
     password: '',
+    name: '',
   });
 
-  const handleLogin = async () => {
-    const result = await signIn('credentials', {
-      redirect: false,
-      email: loginInfo.email,
-      password: loginInfo.password,
-    });
-    console.log(result);
+  const handleRegister = async () => {
+    const req = await axios.post('/api/auth/register', regInfo);
+    const { data } = req;
+    console.log(data);
+    if (data.success) {
+      router.push('/login');
+    } else {
+      alert(data.message);
+    }
   };
 
   const providers = [
@@ -65,16 +65,16 @@ export const Login: NextPage = () => {
               style={{ marginRight: 'auto', marginLeft: 'auto' }}
             />
             <Heading size={useBreakpointValue({ base: 'xs', md: '5xl' })}>
-              به حساب کاربری خود وارد شوید
+              ساختن حساب کاربری جدید
             </Heading>
             <HStack spacing="1" justify="center">
-              <Text>حساب کاربری ندارید؟</Text>
+              <Text>حساب کاربری دارید؟</Text>
               <Button
                 variant="link"
                 colorScheme="blue"
-                onClick={() => router.push('/singup')}
+                onClick={() => router.push('/login')}
               >
-                ثبت نام
+                ورود
               </Button>
             </HStack>
           </Stack>
@@ -89,36 +89,47 @@ export const Login: NextPage = () => {
           <Stack spacing="6">
             <Stack spacing="5">
               <FormControl>
+                <FormLabel htmlFor="text">نام</FormLabel>
+                <Input
+                  id="text"
+                  type="text"
+                  value={regInfo.name}
+                  onChange={e =>
+                    setRegInfo({ ...regInfo, name: e.target.value })
+                  }
+                />
+              </FormControl>
+              <FormControl>
                 <FormLabel htmlFor="email">ایمیل</FormLabel>
                 <Input
                   id="email"
                   type="email"
-                  value={loginInfo.email}
+                  value={regInfo.email}
                   onChange={e =>
-                    setLoginInfo({ ...loginInfo, email: e.target.value })
+                    setRegInfo({ ...regInfo, email: e.target.value })
                   }
                 />
               </FormControl>
-              <PasswordField
-                value={loginInfo.password}
-                onChange={e =>
-                  setLoginInfo({ ...loginInfo, password: e.target.value })
-                }
-              />
+              <Box>
+                <PasswordField
+                  value={regInfo.password}
+                  onChange={e =>
+                    setRegInfo({ ...regInfo, password: e.target.value })
+                  }
+                />
+                <Text fontSize="sm" color="textsecondary" mt={4} mr={2}>
+                  رمز عبور باید حداقل 6 کاراکتر باشد
+                </Text>
+              </Box>
             </Stack>
 
-            <Button
-              variant="link"
-              colorScheme="blue"
-              size="sm"
-              alignSelf="start"
-            >
-              بازیابی رمز عبور؟
-            </Button>
-
             <Stack spacing="6">
-              <Button variant="solid" colorScheme="blue" onClick={handleLogin}>
-                ورود
+              <Button
+                variant="solid"
+                colorScheme="blue"
+                onClick={handleRegister}
+              >
+                ساختن حساب کاربری
               </Button>
               <HStack>
                 <Divider />
@@ -129,11 +140,7 @@ export const Login: NextPage = () => {
               </HStack>
               <ButtonGroup variant="outline" spacing="4" width="full">
                 {providers.map(({ name, icon }) => (
-                  <Button
-                    key={name}
-                    width="full"
-                    onClick={() => signIn('github')}
-                  >
+                  <Button key={name} width="full">
                     <VisuallyHidden>ثبت‌نام با {name}</VisuallyHidden>
                     {icon}
                   </Button>
@@ -147,4 +154,4 @@ export const Login: NextPage = () => {
   );
 };
 
-export default Login;
+export default Singup;

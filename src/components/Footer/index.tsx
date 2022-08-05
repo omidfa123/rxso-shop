@@ -1,10 +1,22 @@
-import { Badge, Box, Button, Flex, Text } from '@chakra-ui/react';
-import { IconAddCircle } from '../../utils/Icons';
-import CartModal from '../CartModal';
+import {
+  Badge,
+  Box,
+  Button,
+  Divider,
+  Flex,
+  HStack,
+  Text,
+  VStack,
+} from '@chakra-ui/react';
+import Image from 'next/future/image';
+import { IconAddCircle, IconMinusCircle } from '../../utils/Icons';
 import Container from '../common/Container';
 import Toman from '../common/Toman';
+import AddProduct from '../SingleProduct/AddProduct';
+import useStore from 'src/stores/products';
 
 const Footer = () => {
+  const store = useStore();
   return (
     <Box
       as="footer"
@@ -33,9 +45,38 @@ const Footer = () => {
       }}
     >
       <Container>
+        <Button
+          pos={'absolute'}
+          zIndex={'999'}
+          display={store.isCartOpen || store.cart.length > 0 ? 'none' : 'block'}
+          left={'9.16%'}
+          top="-9%"
+          bgColor="secondary.500"
+          fontWeight="semibold"
+          w={'21%'}
+          fontSize="xl"
+          color="#fff"
+          _hover={{ backgroundColor: 'secondary.500' }}
+          _active={{ bg: 'secondary.700' }}
+          onClick={() => store.addToCart(store.singleProduct)}
+        >
+          افزودن به لیست
+        </Button>
+        <Box
+          pos={'absolute'}
+          zIndex={'999'}
+          display={
+            !store.isCartOpen && store.cart.length > 0 ? 'block' : 'none'
+          }
+          left={'12%'}
+          top="-14%"
+        >
+          <AddProduct width="140px" showCart />
+        </Box>
         <Box
           h="100%"
           filter={'url(#round)'}
+          boxShadow={' 0px -4px 50px rgba(0, 0, 0, 0.06)'}
           _before={{
             content: '""',
             display: 'block',
@@ -60,7 +101,10 @@ const Footer = () => {
               </Text>
               <Flex alignItems="baseline" gap="2">
                 <Text color="primary.500" fontWeight="bold" fontSize="5xl">
-                  ۳۸٫۹۳۰٫۰۰۰
+                  {store.cart
+                    .reduce((acc, item) => (acc + item.price) * store.count, 0)
+                    .toLocaleString('fa-IR')
+                    .replace(/٬/g, '٫')}
                 </Text>
                 <Toman bgColor="#fff" />
               </Flex>
@@ -71,7 +115,13 @@ const Footer = () => {
                   display="flex"
                   alignItems={'center'}
                   justifyContent={'center'}
-                  leftIcon={<IconAddCircle boxSize={6} />}
+                  leftIcon={
+                    store.isCartOpen ? (
+                      <IconMinusCircle boxSize={6} />
+                    ) : (
+                      <IconAddCircle boxSize={6} />
+                    )
+                  }
                   variant="unstyled"
                   aria-label="افزودن آیتم"
                   fontSize="xl"
@@ -81,28 +131,34 @@ const Footer = () => {
                   _hover={{
                     color: 'primary.500',
                   }}
+                  onClick={() =>
+                    store.isCartOpen
+                      ? store.setIsCartOpen(false)
+                      : store.setIsCartOpen(true)
+                  }
                 >
-                  مشاهده لیست خرید
+                  {store.isCartOpen ? ' بستن لیست خرید' : 'مشاهد لیست خرید'}
                 </Button>
-                <Badge
-                  bgColor="secondary.700"
-                  variant="solid"
-                  w={'23px'}
-                  h={'23px'}
-                  borderRadius="50%"
-                  display="flex"
-                  pos={'absolute'}
-                  alignItems="end"
-                  justifyContent="center"
-                  top="-14%"
-                  right="-6%"
-                  transition={'all 0.2s ease-in-out'}
-                >
-                  <Text as="span" fontSize="sm" color="white">
-                    ۷
-                  </Text>
-                </Badge>
-                <CartModal />
+                {store.cart.length > 0 && (
+                  <Badge
+                    bgColor="secondary.700"
+                    variant="solid"
+                    w={'23px'}
+                    h={'23px'}
+                    borderRadius="50%"
+                    display="flex"
+                    pos={'absolute'}
+                    alignItems="end"
+                    justifyContent="center"
+                    top="-14%"
+                    right="-6%"
+                    transition={'all 0.2s ease-in-out'}
+                  >
+                    <Text as="span" fontSize="sm" color="white">
+                      {store.cart.length.toLocaleString('fa-IR')}
+                    </Text>
+                  </Badge>
+                )}
               </Box>
               <Button
                 w={'10.125rem'}
@@ -113,18 +169,76 @@ const Footer = () => {
                 border="6px"
                 bgColor="primary.500"
                 _hover={{
-                  bgColor: 'primary.600',
-                  borderColor: 'primary.600',
+                  bgColor: 'primary.800',
+                  borderColor: 'primary.800',
                 }}
                 _active={{
                   bgColor: 'primary.700',
                   borderColor: 'primary.700',
                 }}
               >
-                افزودن به سبد خرید
+                {store.isCartOpen ? 'تکمیل فرایند خرید' : 'افزودن به سبد خرید '}
               </Button>
             </Flex>
           </Flex>
+          <Box
+            position="absolute"
+            bottom="0"
+            right="12%"
+            zIndex="-1"
+            w="614px"
+            h="640px"
+            rounded="30px"
+            bgColor="white"
+            pt={8}
+            pr={8}
+            overflowY="auto"
+            display={store.isCartOpen ? 'block' : 'none'}
+            transition={'all .3s ease-in-out'}
+          >
+            <Box>
+              {store.cart.map((item, i) => (
+                <>
+                  <HStack key={i} spacing={8} w="100%" pl={6}>
+                    <VStack spacing={2}>
+                      <Image src={item.image} height={60} width={60} />
+                      <Text fontSize="xs" color="textsecondary" opacity=".6">
+                        {item.category}
+                      </Text>
+                    </VStack>
+                    <VStack spacing={2} alignItems="start">
+                      <Text fontSize="xl" color="textprimary">
+                        {item.name}
+                      </Text>
+                      <Text
+                        fontSize="sm"
+                        fontWeight="light"
+                        color="textsecondary"
+                        opacity=".6"
+                        lineHeight="16.8px"
+                      >
+                        {item.englishName}
+                      </Text>
+                      <HStack spacing={2}>
+                        <Text
+                          fontSize="3xl"
+                          fontWeight="bold"
+                          color="primary.500"
+                        >
+                          {item.price
+                            .toLocaleString('fa-IR')
+                            .replace(/٬/g, '٫')}
+                        </Text>
+                        <Toman bgColor="#fff" />
+                      </HStack>
+                    </VStack>
+                    <AddProduct width="110px" showCart={false} />
+                  </HStack>
+                  <Divider my={7} />
+                </>
+              ))}
+            </Box>
+          </Box>
         </Box>
       </Container>
     </Box>

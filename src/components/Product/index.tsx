@@ -32,7 +32,6 @@ const Product = () => {
       store.setProducts(res.data.data);
     });
   }, []);
-
   return (
     <Box h="100%">
       <SimpleGrid

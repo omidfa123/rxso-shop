@@ -1,5 +1,5 @@
-import dbConnect from '../../../src/utils/dbConnect';
-import Products from '../../../src/server/models/products.model';
+import dbConnect from 'src/utils/dbConnect';
+import Products from 'src/server/models/products.model';
 import { NextApiResponse, NextApiRequest } from 'next';
 
 dbConnect();
