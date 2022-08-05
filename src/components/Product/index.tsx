@@ -6,6 +6,7 @@ import Toman from '../common/Toman';
 import useStore from '../../stores/products';
 
 interface Iproduct {
+  category: string;
   _id: number;
   name: string;
   price: number;
