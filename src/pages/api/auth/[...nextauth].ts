@@ -28,7 +28,7 @@ export const authOptions: NextAuthOptions = {
       // @ts-ignore
       async authorize(credentials) {
         await dbConnect();
-        const user = await findUser(credentials?.email);
+        const user = await findUser(credentials?.email!);
         if (!user) {
           throw new Error('User not found');
         }

@@ -1,12 +1,12 @@
 import User from '../models/user.model';
 
-export const userExists = async email => {
+export const userExists = async (email: string) => {
   const user = await User.findOne({ email });
   if (user) return true;
   return false;
 };
 
-export const findUser = async email => {
+export const findUser = async (email: string) => {
   const user = await User.findOne({ email });
   return user;
 };
