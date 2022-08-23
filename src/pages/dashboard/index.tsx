@@ -82,7 +82,7 @@ export const Dashboard = ({ userInfo }: { userInfo: Props }) => {
     axios.get('/api/products').then(res => {
       store.setProducts(res.data.data);
     });
-  }, []);
+  }, [store]);
 
   const [fileToUpload, setFileToUpload] = useState<string | File>('');
   const [publicId, setPublicId] = useState('');

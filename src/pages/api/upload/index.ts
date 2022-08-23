@@ -11,7 +11,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-export default async function (req: any, res: any) {
+export default async function handler(req: any, res: any) {
   upload.single('image')(req, res, async err => {
     streamifier.createReadStream(req.file.buffer).pipe(
       cloudinary.uploader.upload_stream(
