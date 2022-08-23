@@ -2,6 +2,7 @@ import {
   Badge,
   Box,
   Button,
+  Container,
   Divider,
   Flex,
   HStack,
@@ -9,11 +10,13 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import Image from 'next/future/image';
-import { IconAddCircle, IconMinusCircle } from '../../utils/Icons';
-import Container from '../common/Container';
-import Toman from '../common/Toman';
 import AddProduct from '../SingleProduct/AddProduct';
-import useStore from 'src/stores/products';
+import useStore from 'stores/products';
+import {
+  MinusCircleIcon,
+  AddCircleIcon,
+  PriceIcon,
+} from 'components/common/Icons';
 
 const Footer = () => {
   const store = useStore();
@@ -44,7 +47,7 @@ const Footer = () => {
         width: '40vw',
       }}
     >
-      <Container>
+      <Container maxWidth="1440px" h="100%" mx="auto" pos="relative">
         <Button
           pos={'absolute'}
           zIndex={'999'}
@@ -106,7 +109,7 @@ const Footer = () => {
                     .toLocaleString('fa-IR')
                     .replace(/٬/g, '٫')}
                 </Text>
-                <Toman bgColor="#fff" />
+                <PriceIcon />
               </Flex>
             </Flex>
             <Flex pt={2} gap={6} alignItems="center">
@@ -117,9 +120,9 @@ const Footer = () => {
                   justifyContent={'center'}
                   leftIcon={
                     store.isCartOpen ? (
-                      <IconMinusCircle boxSize={6} />
+                      <MinusCircleIcon boxSize={6} />
                     ) : (
-                      <IconAddCircle boxSize={6} />
+                      <AddCircleIcon boxSize={6} />
                     )
                   }
                   variant="unstyled"
@@ -197,9 +200,9 @@ const Footer = () => {
             transition={'all .3s ease-in-out'}
           >
             <Box>
-              {store.cart.map((item, i) => (
-                <>
-                  <HStack key={i} spacing={8} w="100%" pl={6}>
+              {store.cart.map(item => (
+                <div key={item.name}>
+                  <HStack spacing={8} w="100%" pl={6}>
                     <VStack spacing={2}>
                       <Image src={item.image} height={60} width={60} />
                       <Text fontSize="xs" color="textsecondary" opacity=".6">
@@ -229,13 +232,13 @@ const Footer = () => {
                             .toLocaleString('fa-IR')
                             .replace(/٬/g, '٫')}
                         </Text>
-                        <Toman bgColor="#fff" />
+                        <PriceIcon />
                       </HStack>
                     </VStack>
                     <AddProduct width="110px" showCart={false} />
                   </HStack>
                   <Divider my={7} />
-                </>
+                </div>
               ))}
             </Box>
           </Box>

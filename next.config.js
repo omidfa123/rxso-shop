@@ -8,7 +8,7 @@ const nextConfig = {
     },
   },
   images: {
-    domains: ['www.rixoshop.com'],
+    domains: ['www.rixoshop.com', 'res.cloudinary.com'],
   },
   async headers() {
     return [

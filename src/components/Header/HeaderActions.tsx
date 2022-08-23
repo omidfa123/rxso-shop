@@ -1,6 +1,4 @@
-import { Search2Icon } from '@chakra-ui/icons';
-import { IconeUser } from '../../utils/Icons';
-import DarkModeSwitch from '../DarkModeSwitch';
+import { SearchIcon, UserIcon } from 'components/common/Icons';
 import {
   Modal,
   ModalOverlay,
@@ -8,59 +6,80 @@ import {
   ModalFooter,
   ModalBody,
   Button,
-  Flex,
   IconButton,
   InputGroup,
   InputRightAddon,
   Input,
   Tooltip,
   Box,
+  useDisclosure,
 } from '@chakra-ui/react';
 import { useState } from 'react';
+import { useColorMode } from '@chakra-ui/react';
+import { MoonIcon, SunIcon } from 'components/common/Icons';
 import useStore from '../../stores/products';
 import { useRouter } from 'next/router';
 const HeaderActions = () => {
   const router = useRouter();
   const store = useStore();
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [search, setSearch] = useState('');
+  const { colorMode, toggleColorMode } = useColorMode();
+
+  const actionData = [
+    {
+      label: ['حالت روشن', 'حالت شب'],
+      icon: [<MoonIcon boxSize="34px" />, <SunIcon boxSize="34px" />],
+      onClick: () => toggleColorMode(),
+    },
+    {
+      label: ['جستجو'],
+      icon: [<SearchIcon boxSize="34px" />],
+      onClick: () => onOpen(),
+    },
+    {
+      label: ['ناحیه کاربری'],
+      icon: [<UserIcon boxSize="34px" />],
+      onClick: () => router.push('/login'),
+    },
+  ];
+
   return (
     <>
-      <Box pos="absolute" left="0" top="0">
-        <DarkModeSwitch />
-        <Tooltip label="ناحیه کاربری" offset={[0, 13]}>
-          <IconButton
-            isRound
-            w="42px"
-            h="42px"
-            icon={<IconeUser />}
-            aria-label="ثبتنام یا ورود"
-            variant="ghost"
-            opacity={0.8}
-            onClick={() => router.push('/login')}
-            mx="3"
-          />
-        </Tooltip>
-        <Tooltip label="جستجو" offset={[0, 13]}>
-          <IconButton
-            isRound
-            w="42px"
-            h="42px"
-            icon={<Search2Icon color="#1E385F" boxSize={4} />}
-            aria-label="جستجو"
-            variant="ghost"
-            opacity={0.8}
-            onClick={() => setIsOpen(true)}
-          />
-        </Tooltip>
+      <Box pos="absolute" left="0" top="0" zIndex="banner">
+        {actionData.map((action, index) => (
+          <Tooltip
+            key={action.label[0]}
+            label={colorMode === 'dark' ? action.label[0] : action.label[1]}
+          >
+            <IconButton
+              aria-label={action.label[0]}
+              icon={
+                index === 0
+                  ? colorMode === 'dark'
+                    ? action.icon[0]
+                    : action.icon[1]
+                  : action.icon[0]
+              }
+              w="42px"
+              h="42px"
+              isRound
+              onClick={action.onClick}
+              color="#1E385F"
+              variant="ghost"
+              opacity={0.8}
+            />
+          </Tooltip>
+        ))}
       </Box>
-      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+
+      <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent pt={4}>
           <ModalBody>
             <InputGroup>
               <InputRightAddon>
-                <Search2Icon />
+                <SearchIcon boxSize="34px" />
               </InputRightAddon>
               <Input
                 value={search}
@@ -68,12 +87,12 @@ const HeaderActions = () => {
                   setSearch(e.target.value);
                   store.searchProducts(e.target.value);
                 }}
-                placeholder="دنبال چه محصولی میگردی؟"
+                placeholder="دنبال چه محصولی هستید؟"
               />
             </InputGroup>
           </ModalBody>
           <ModalFooter>
-            <Button onClick={() => setIsOpen(false)}>بستن</Button>
+            <Button onClick={onClose}>بستن</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

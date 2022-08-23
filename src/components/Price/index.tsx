@@ -1,6 +1,8 @@
 import { Badge, Flex, Text } from '@chakra-ui/react';
-import Toman from '../common/Toman';
-import useStore from '../../stores/products';
+import useStore from 'stores/products';
+import { PriceIcon } from 'components/common/Icons';
+import { persianPrice } from 'utils/persianPrice';
+
 const Price = () => {
   const store = useStore();
   return (
@@ -32,9 +34,9 @@ const Price = () => {
       </Flex>
       <Flex gap={1} alignItems="center">
         <Text color="primary.500" fontWeight="bold" fontSize="3xl">
-          {store.singleProduct.price.toLocaleString('fa-IR').replace(/٬/g, '٫')}
+          {persianPrice(store.singleProduct.price)}
         </Text>
-        <Toman bgColor="#F2F6FB" />
+        <PriceIcon />
       </Flex>
     </Flex>
   );

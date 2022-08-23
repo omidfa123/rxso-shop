@@ -1,39 +1,139 @@
-import { Box, Center, Flex, IconButton, Text } from '@chakra-ui/react';
-import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Mousewheel } from 'swiper';
-import { useState } from 'react';
-import useStore from '../../stores/products';
-//
+import { Box, Center, IconButton, Text } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import useStore from 'stores/products';
 import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/scrollbar';
-import { SwiperButtonNext, SwiperButtonPrev } from './SwiperButtons';
 
-type SwiperProps = {
-  children: React.ReactNode;
-  slidesPerView?: number;
-  spaceBetween?: number;
-  loop?: boolean;
-  autoplay?: boolean;
-  speed?: number;
-  pagination?: boolean;
-  navigation?: boolean;
-  scrollbar?: boolean;
-  mousewheel?: boolean;
-
-  slideTo: (index: number) => void;
-};
+import { Swiper as SwiperType } from 'swiper/types';
+import { ArrowBackIcon, ArrowForwardIcon } from 'components/common/Icons';
+import {
+  CaseIcon,
+  FanIcon,
+  HardDiskIcon,
+  MonitorIcon,
+  MotherboardIcon,
+  RamIcon,
+  SSDIcon,
+} from 'components/common/Icons/SpacialIcons';
 
 const Slider = () => {
   const store = useStore();
   const [activeSlide, setActiveSlide] = useState(0);
-  const [swiper, setSwiper] = useState<SwiperProps>();
+  const [swiper, setSwiper] = useState<SwiperType>();
 
-  const handleClick = (slide: number, category: string) => {
-    swiper?.slideTo(slide);
-    store.categoryProducts(category);
-  };
+  const slides = [
+    {
+      text: 'مادربورد',
+      activeIndex: [7, 14],
+      icon: (
+        <MotherboardIcon
+          boxSize="60px"
+          color={swiper?.realIndex === 0 ? '#2F90CE' : '#A9B1C3'}
+        />
+      ),
+    },
+    {
+      text: 'حافظه رم',
+      activeIndex: [8],
+      icon: (
+        <RamIcon
+          boxSize="60px"
+          color={swiper?.realIndex === 1 ? '#2F90CE' : '#A9B1C3'}
+        />
+      ),
+    },
+    {
+      text: 'هارد دیسک',
+      activeIndex: [9],
+      icon: (
+        <HardDiskIcon
+          boxSize="60px"
+          color={swiper?.realIndex === 2 ? '#2F90CE' : '#A9B1C3'}
+        />
+      ),
+    },
+    {
+      text: 'فن کیس',
+      activeIndex: [10],
+      icon: (
+        <FanIcon
+          boxSize="60px"
+          color={swiper?.realIndex === 3 ? '#2F90CE' : '#A9B1C3'}
+        />
+      ),
+    },
+    {
+      text: 'حافظه SSD',
+      activeIndex: [11],
+      icon: (
+        <SSDIcon
+          boxSize="60px"
+          color={swiper?.realIndex === 4 ? '#2F90CE' : '#A9B1C3'}
+        />
+      ),
+    },
+    {
+      text: 'کیس  ',
+      activeIndex: [12],
+      icon: (
+        <CaseIcon
+          boxSize="60px"
+          color={swiper?.realIndex === 5 ? '#2F90CE' : '#A9B1C3'}
+        />
+      ),
+    },
+    {
+      text: 'مانیتور',
+      activeIndex: [6, 13],
+      icon: (
+        <MonitorIcon
+          boxSize="60px"
+          color={swiper?.realIndex === 6 ? '#2F90CE' : '#A9B1C3'}
+        />
+      ),
+    },
+  ];
+  const sliderBoutton = [
+    {
+      icon: <ArrowForwardIcon boxSize="24px" color="#CACFDB" />,
+      transform: 'translate(-53px , 28px)',
+      ariaLable: 'بعدی',
+      onclick: () => swiper!.slideNext(),
+    },
+    {
+      icon: <ArrowBackIcon boxSize="24px" color="#CACFDB" />,
+      transform: 'translate(53px , 28px)',
+      ariaLable: 'قبلی',
+      onclick: () => swiper!.slidePrev(),
+    },
+  ];
+  useEffect(() => {
+    let selecteCategory: string;
+    switch (swiper?.realIndex) {
+      case 0:
+        selecteCategory = 'motherboard';
+        break;
+      case 1:
+        selecteCategory = 'ram';
+        break;
+      case 2:
+        selecteCategory = 'hard';
+        break;
+      case 3:
+        selecteCategory = 'fan';
+        break;
+      case 4:
+        selecteCategory = 'ssd';
+        break;
+      case 5:
+        selecteCategory = 'case';
+        break;
+      case 6:
+        selecteCategory = 'manitor';
+        break;
+    }
+    store.categoryProducts(selecteCategory!);
+  }, [activeSlide]);
 
   return (
     <Box
@@ -43,272 +143,126 @@ const Slider = () => {
       mx="auto"
       transform="translateY(-120%)"
     >
-      <Box width="43rem">
+      <Box
+        width="43rem"
+        __css={{
+          '& .swiper-initialized': {
+            paddingTop: '8px',
+            height: '116px',
+            borderRadius: '2.7rem',
+          },
+        }}
+      >
+        {sliderBoutton.map((button, index) => (
+          <IconButton
+            key={button.ariaLable}
+            pos="absolute"
+            top="0"
+            right={index === 1 ? '0' : 'unset'}
+            left={index === 0 ? '0' : 'unset'}
+            transform={button.transform}
+            aria-label={button.ariaLable}
+            icon={button.icon}
+            bgColor="transparent"
+            borderRadius="full"
+            border="1px"
+            borderColor="strokecolor"
+            _hover={{
+              bgColor: 'strokecolor',
+              borderColor: 'strokecolor',
+              '& svg': {
+                color: '#fff',
+              },
+            }}
+            _active={{
+              bgColor: 'strokecolor',
+              borderColor: 'strokecolor',
+              '& svg': {
+                color: '#fff',
+              },
+            }}
+            _focus={{
+              outline: 'none',
+            }}
+            onClick={button.onclick}
+          />
+        ))}
+
         <Swiper
           direction="horizontal"
-          mousewheel={true}
-          modules={[Mousewheel]}
           centeredSlides={true}
           spaceBetween={22}
           slidesPerView={7}
           loop={true}
-          onSwiper={(swiper: any) => {
+          onSwiper={swiper => {
             setSwiper(swiper);
           }}
-          onSlideChange={s => {
-            const indexCurrentSlide = s.activeIndex;
-            setActiveSlide(indexCurrentSlide);
-          }}
+          onSlideChange={slide => setActiveSlide(slide.activeIndex)}
           initialSlide={3}
         >
-          <SwiperButtonNext />
-          <SwiperButtonPrev />
-
-          <SwiperSlide
-            onClick={() => {
-              handleClick(7, 'motherboard');
-            }}
-          >
-            <>
-              <Center flexDir="column" gap={3}>
+          {slides.map(({ text, activeIndex, icon }, index) => (
+            <SwiperSlide key={index} onClick={() => swiper?.slideToLoop(index)}>
+              <Center flexDir="column" gap={3} role="group">
                 <IconButton
-                  transition="none"
-                  aria-label={'خرید مانیتور'}
+                  aria-label={text}
                   w="4.5rem"
                   h="4.5rem"
                   borderRadius="full"
                   border="1px"
                   borderColor={
-                    activeSlide === 7 || activeSlide === 14
+                    activeSlide === activeIndex[0] ||
+                    activeSlide === activeIndex[1]
                       ? 'activecolor'
                       : 'iconcolor'
                   }
                   bgColor={
-                    activeSlide === 7 || activeSlide === 14
+                    activeSlide === activeIndex[0] ||
+                    activeSlide === activeIndex[1]
                       ? 'activecolor'
-                      : 'transparent'
+                      : 'iconcolor'
                   }
                   boxShadow={
-                    activeSlide === 7 || activeSlide === 14
+                    activeSlide === activeIndex[0] ||
+                    activeSlide === activeIndex[1]
                       ? '0px 14px 24px rgba(24, 133, 255, 0.2)'
                       : 'none'
                   }
-                  icon={
-                    <Image
-                      src="/assets/img/motherbord_active.png"
-                      height={50}
-                      width={48}
-                    />
+                  icon={icon}
+                  _hover={
+                    activeSlide === activeIndex[0] ||
+                    activeSlide === activeIndex[1]
+                      ? {}
+                      : {
+                          bgColor: 'activecolor',
+                          borderColor: 'activecolor',
+                          '& svg': {
+                            color: '#2F90CE',
+                          },
+                        }
                   }
+                  _active={{
+                    bgColor: 'rgba(24, 133, 255, 0.8)',
+                    borderColor: 'rgba(24, 133, 255, 0.8)',
+                  }}
                 />
                 <Text
                   color={
-                    activeSlide === 7 || activeSlide === 14
+                    activeSlide === activeIndex[0] ||
+                    activeSlide === activeIndex[1]
                       ? 'activecolor'
                       : 'menutcolor'
                   }
+                  _groupHover={{
+                    color: 'activecolor',
+                  }}
                   fontSize={'sm'}
                   fontWeight="medium"
                 >
-                  مادر بورد
+                  {text}
                 </Text>
               </Center>
-            </>
-          </SwiperSlide>
-          <SwiperSlide
-            onClick={() => {
-              handleClick(8, 'ram');
-            }}
-          >
-            <Center flexDir="column" gap={3}>
-              <IconButton
-                aria-label={'خرید مانیتور'}
-                w="4.5rem"
-                h="4.5rem"
-                borderRadius="full"
-                border="1px"
-                borderColor={activeSlide === 8 ? 'activecolor' : 'iconcolor'}
-                bgColor={activeSlide === 8 ? 'activecolor' : 'transparent'}
-                boxShadow={
-                  activeSlide === 8
-                    ? '0px 14px 24px rgba(24, 133, 255, 0.2)'
-                    : 'none'
-                }
-                icon={
-                  <Image
-                    src="/assets/img/ram_active.png"
-                    height={56}
-                    width={48}
-                  />
-                }
-              />
-              <Text
-                color={activeSlide === 8 ? 'activecolor' : 'menutcolor'}
-                fontSize={'sm'}
-                fontWeight="medium"
-              >
-                حافظه رم
-              </Text>
-            </Center>
-          </SwiperSlide>
-          <SwiperSlide onClick={() => handleClick(9, 'hard')}>
-            <Center flexDir="column" gap={3}>
-              <IconButton
-                aria-label={'خرید مانیتور'}
-                w="4.5rem"
-                h="4.5rem"
-                borderRadius="full"
-                border="1px"
-                borderColor={activeSlide === 9 ? 'activecolor' : 'iconcolor'}
-                bgColor={activeSlide === 9 ? 'activecolor' : 'transparent'}
-                boxShadow={
-                  activeSlide === 9
-                    ? '0px 14px 24px rgba(24, 133, 255, 0.2)'
-                    : 'none'
-                }
-                icon={
-                  <Image
-                    src="/assets/img/hard_active.png"
-                    height={56}
-                    width={48}
-                  />
-                }
-              />
-              <Text
-                color={activeSlide === 9 ? 'activecolor' : 'menutcolor'}
-                fontSize={'sm'}
-                fontWeight="medium"
-              >
-                هارد دیسک
-              </Text>
-            </Center>
-          </SwiperSlide>
-          <SwiperSlide
-            onClick={() => {
-              handleClick(10, 'fan');
-            }}
-          >
-            <Center flexDir="column" gap={3}>
-              <IconButton
-                aria-label={'خرید مانیتور'}
-                w="4.5rem"
-                h="4.5rem"
-                borderRadius="full"
-                border="1px"
-                borderColor={activeSlide === 10 ? 'activecolor' : 'iconcolor'}
-                bgColor={activeSlide === 10 ? 'activecolor' : 'transparent'}
-                icon={
-                  <Image src="/assets/img/img.png" height={96} width={96} />
-                }
-                boxShadow={
-                  activeSlide === 10
-                    ? '0px 14px 24px rgba(24, 133, 255, 0.2)'
-                    : 'none'
-                }
-              />
-              <Text
-                color={activeSlide === 10 ? 'activecolor' : 'menutcolor'}
-                fontSize={'sm'}
-                fontWeight="medium"
-              >
-                فن کیس
-              </Text>
-            </Center>
-          </SwiperSlide>
-          <SwiperSlide onClick={() => handleClick(11, 'ssd')}>
-            <Center flexDir="column" gap={3}>
-              <IconButton
-                aria-label={'خرید مانیتور'}
-                w="4.5rem"
-                h="4.5rem"
-                borderRadius="full"
-                border="1px"
-                borderColor={activeSlide === 11 ? 'activecolor' : 'iconcolor'}
-                bgColor={activeSlide === 11 ? 'activecolor' : 'iconcolor'}
-                boxShadow={
-                  activeSlide === 11
-                    ? '0px 14px 24px rgba(24, 133, 255, 0.2)'
-                    : 'none'
-                }
-                icon={
-                  <Image src="/assets/img/ssd.svg" height={56} width={48} />
-                }
-              />
-              <Text
-                color={activeSlide === 11 ? 'activecolor' : 'menutcolor'}
-                fontSize={'sm'}
-                fontWeight="medium"
-              >
-                حافظه SSD
-              </Text>
-            </Center>
-          </SwiperSlide>
-          <SwiperSlide onClick={() => handleClick(12, 'case')}>
-            <Center flexDir="column" gap={3}>
-              <IconButton
-                aria-label={'خرید مانیتور'}
-                w="4.5rem"
-                h="4.5rem"
-                borderRadius="full"
-                border="1px"
-                borderColor={activeSlide === 12 ? 'activecolor' : 'iconcolor'}
-                bgColor={activeSlide === 12 ? 'activecolor' : 'iconcolor'}
-                boxShadow={
-                  activeSlide === 12
-                    ? '0px 14px 24px rgba(24, 133, 255, 0.2)'
-                    : 'none'
-                }
-                icon={
-                  <Image src="/assets/img/wrong.svg" height={56} width={48} />
-                }
-              />
-              <Text
-                color={activeSlide === 12 ? 'activecolor' : 'menutcolor'}
-                fontSize={'sm'}
-                fontWeight="medium"
-              >
-                کیس
-              </Text>
-            </Center>
-          </SwiperSlide>
-          <SwiperSlide onClick={() => handleClick(6, 'manitor')}>
-            <Center flexDir="column" gap={3}>
-              <IconButton
-                aria-label={'خرید مانیتور'}
-                w="4.5rem"
-                h="4.5rem"
-                borderRadius="full"
-                border="1px"
-                borderColor={
-                  activeSlide === 6 || activeSlide === 13
-                    ? 'activecolor'
-                    : 'iconcolor'
-                }
-                bgColor={
-                  activeSlide === 6 || activeSlide === 13
-                    ? 'activecolor'
-                    : 'iconcolor'
-                }
-                boxShadow={
-                  activeSlide === 6 || activeSlide === 13
-                    ? '0px 14px 24px rgba(24, 133, 255, 0.2)'
-                    : 'none'
-                }
-                icon={<Image src="/assets/img/tv.svg" height={56} width={48} />}
-              />
-              <Text
-                color={
-                  activeSlide === 6 || activeSlide === 13
-                    ? 'activecolor'
-                    : 'menutcolor'
-                }
-                fontSize={'sm'}
-                fontWeight="medium"
-              >
-                مانیتور
-              </Text>
-            </Center>
-          </SwiperSlide>
+            </SwiperSlide>
+          ))}
         </Swiper>
       </Box>
     </Box>

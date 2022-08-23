@@ -14,13 +14,14 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": "."
+    "baseUrl": "src"
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "pages/api/auth/[...nextauth].ts"
+    "src/pages/api/auth/[...nextauth].ts",
+    "src/utils/Icons.js"
   ],
   "exclude": ["node_modules"]
 }

@@ -30,6 +30,8 @@ type Store = {
   sortProducts: (sortBy: string) => void;
   searchProducts: (search: string) => void;
   categoryProducts: (category: string) => void;
+  deleteProduct: (id: number) => void;
+  addProduct: (product: Iproduct) => void;
 };
 
 const useStore = create<Store>((set, get) => ({
@@ -56,13 +58,20 @@ const useStore = create<Store>((set, get) => ({
     name: 'کارت گرافیک انویدیاRTX2080',
     price: 2600000,
     image: '',
-    image2: '/assets/img/cart.jpg',
+    image2:
+      'https://res.cloudinary.com/rixso/image/upload/v1661045458/rixsoShop/image_20_porgao.png',
     thumbnail: '',
     englishName: 'NVIDIA GeForce RTX 2080 Ti Founders Edition',
     createdAt: '',
   },
   originalProducts: [],
-
+  addProduct: (product: Iproduct) => {
+    set(state => ({ ...state, products: [...state.products, product] }));
+  },
+  deleteProduct: async (id: number) => {
+    const { data } = await axios.delete(`/api/products/${id}`);
+    set(state => ({ ...state, products: data.data }));
+  },
   setProducts: products =>
     set(state => ({ ...state, products, originalProducts: products })),
   setSingleProduct: (product: Iproduct) => {

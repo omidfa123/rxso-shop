@@ -1,5 +1,5 @@
 import { Box } from '@chakra-ui/react';
-import useStore from 'src/stores/products';
+import useStore from 'stores/products';
 const Overlay = () => {
   const store = useStore();
   return (

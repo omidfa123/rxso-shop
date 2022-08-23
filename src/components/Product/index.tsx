@@ -1,9 +1,18 @@
-import { Box, Button, Divider, Flex, SimpleGrid, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Divider,
+  Flex,
+  HStack,
+  SimpleGrid,
+  Text,
+} from '@chakra-ui/react';
 import axios from 'axios';
 import Image from 'next/image';
 import { useEffect } from 'react';
-import Toman from '../common/Toman';
-import useStore from '../../stores/products';
+import useStore from 'stores/products';
+import { PriceIcon } from 'components/common/Icons';
+import { persianPrice } from 'utils/persianPrice';
 
 interface Iproduct {
   category: string;
@@ -34,7 +43,7 @@ const Product = () => {
     });
   }, []);
   return (
-    <Box h="100%">
+    <Box w="calc(100% - 334px)" h="100%">
       <SimpleGrid
         columns={6}
         spacing={2}
@@ -79,7 +88,6 @@ const Product = () => {
             onClick={() => clickHandler(item._id)}
             position="relative"
             align={'center'}
-            cursor="pointer"
             outline={
               store.singleProduct._id === item._id
                 ? ' #F44A69 solid 2px '
@@ -112,12 +120,12 @@ const Product = () => {
             >
               {item.englishName}
             </Text>
-            <Flex gap={1} alignItems="baseline">
-              <Text color="primary.500" fontWeight="bold" fontSize="2xl" mb={4}>
-                {item.price.toLocaleString('fa-IR').replace(/٬/g, '٫')}
+            <HStack spacing="5px" mb={4}>
+              <Text color="primary.500" fontWeight="bold" fontSize="2xl">
+                {persianPrice(item.price)}
               </Text>
-              <Toman bgColor="#fff" />
-            </Flex>
+              <PriceIcon boxSize="18px" />
+            </HStack>
             <Button
               variant="outline"
               color="secondary.500"
@@ -128,12 +136,17 @@ const Product = () => {
               borderRadius={6}
               mb="12px"
               _hover={{
-                color: 'secondary.500',
+                color: '#fff',
                 borderColor: 'secondary.500',
+                bgColor: 'secondary.500',
               }}
               _active={{
-                color: 'secondary.700',
+                color: '#fff',
                 borderColor: 'secondary.700',
+                bgColor: 'secondary.700',
+              }}
+              onClick={() => {
+                store.addToCart(item);
               }}
             >
               افزودن به لیست

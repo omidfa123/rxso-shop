@@ -1,8 +1,7 @@
-import { AddIcon, MinusIcon } from '@chakra-ui/icons';
+import { AddIcon, MinusIcon } from 'components/common/Icons';
 import { Button, Flex, HStack, IconButton, Text } from '@chakra-ui/react';
-import { useState } from 'react';
-import { IconDelete } from '../../utils/Icons';
-import useStore from 'src/stores/products';
+import { DeleteIcon } from 'components/common/Icons';
+import useStore from 'stores/products';
 
 const AddProduct = ({
   width,
@@ -27,7 +26,7 @@ const AddProduct = ({
           aria-label="اضافه کردن"
           borderRadius="none"
           bgColor="transparent"
-          icon={<AddIcon boxSize="15px" />}
+          icon={<AddIcon boxSize="24px" />}
           onClick={() => store.setCount(store.count + 1)}
         />
         <Flex
@@ -47,7 +46,13 @@ const AddProduct = ({
           aria-label="کم کردن"
           borderRadius="none"
           bgColor="transparent"
-          icon={store.count > 1 ? <MinusIcon /> : <IconDelete boxSize="15px" />}
+          icon={
+            store.count > 1 ? (
+              <MinusIcon boxSize="24px" />
+            ) : (
+              <DeleteIcon boxSize="24px" />
+            )
+          }
           onClick={() => {
             store.count === 1
               ? store.removeFromCart(store.singleProduct)

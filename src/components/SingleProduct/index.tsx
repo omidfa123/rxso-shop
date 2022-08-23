@@ -11,18 +11,17 @@ import {
 import Image from 'next/image';
 import { useState } from 'react';
 import Price from '../Price';
-import useStore from '../../stores/products';
-import AddProduct from './AddProduct';
+import useStore from 'stores/products';
 
 const SingleProduct = () => {
   const store = useStore();
   const [selected, setSelected] = useState('1');
 
-  console.log(store.cart);
   return (
     <Flex
       bgColor="#F2F6FB"
       h="100%"
+      w="334px"
       borderRadius={8}
       flexDir="column"
       px="14px"
@@ -82,8 +81,8 @@ const SingleProduct = () => {
           { description: 'حجم حافظه گرافیکی:', value: 'DDR5' },
           { description: 'مدل پردازنده:', value: 'RTX2080' },
           { description: 'پردازنده گرافیکی:', value: 'Nvidia' },
-        ].map((item, index) => (
-          <Flex key={index} gap={1}>
+        ].map(item => (
+          <Flex key={item.description} gap={1}>
             <Text opacity=".6">{item.description}</Text>
             <Text>{item.value}</Text>
           </Flex>

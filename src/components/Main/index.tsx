@@ -8,63 +8,68 @@ import {
   DrawerHeader,
   DrawerOverlay,
   Flex,
+  HStack,
+  Select,
   SelectField,
+  useDisclosure,
+  VStack,
 } from '@chakra-ui/react';
 import { useState } from 'react';
-import { IconFilter } from '../../utils/Icons';
-import Select from '../common/Select';
+import { DropdownIcon, FilterIcon } from 'components/common/Icons';
 import Products from '../Product';
 import SingleProduct from '../SingleProduct';
-import uesStore from '../../stores/products';
+import uesStore from 'stores/products';
 
 const Main = () => {
   const store = uesStore();
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, onClose, onOpen } = useDisclosure();
   return (
     <>
-      <Box
+      <VStack
         as="main"
         h="640px"
         w="1191px"
         mx="auto"
-        display="flex"
-        flexDir={'column'}
-        gap={'1.2rem'}
+        spacing={'1.2rem'}
         zIndex="20"
         pos="relative"
       >
-        <Flex gap={2}>
-          <Select />
+        <HStack spacing={4} alignSelf="start">
+          <Select
+            icon={<DropdownIcon />}
+            bgColor="white"
+            w="max-content"
+            h="2.75rem"
+            fontSize={'xl'}
+            css={{
+              '& + .css-116fcjy': { right: 'unset', left: '.5rem' },
+            }}
+            onChange={e => store.sortProducts(e.target.value)}
+            color="textsecondary"
+          >
+            <option value="lowest">ارزان‌ترین به گران‌ترین</option>
+            <option value="highest">گران‌ترین به ارزان‌ترین</option>
+            <option value="newest">جدیدترین به قدیمی‌ترین</option>
+            <option value="original">قدیمی‌ترین به جدیدترین</option>
+          </Select>
           <Button
             bg="white"
             color={'textsecondary'}
-            w="10.375rem"
-            h={'2.75rem'}
+            h="2.75rem"
             fontSize={'xl'}
             fontWeight={'regular'}
-            lineHeight={5}
-            letterSpacing={'0.02rem'}
-            borderRadius="6px"
-            leftIcon={<IconFilter />}
-            onClick={() => setIsOpen(true)}
+            leftIcon={<FilterIcon />}
+            onClick={onOpen}
           >
             فیلتر محصولات
           </Button>
-        </Flex>
-        <Flex h="100%" w="100%" gap={6}>
-          <Box w="calc(100% - 334px)" h="100%">
-            <Products />
-          </Box>
-          <Box w="334px" h="100%">
-            <SingleProduct />
-          </Box>
-        </Flex>
-      </Box>
-      <Drawer
-        isOpen={isOpen}
-        placement="right"
-        onClose={() => setIsOpen(false)}
-      >
+        </HStack>
+        <HStack h="full" w="full" spacing={6}>
+          <Products />
+          <SingleProduct />
+        </HStack>
+      </VStack>
+      <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />

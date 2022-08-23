@@ -1,6 +1,6 @@
-import { Box } from '@chakra-ui/react';
+import { Box, Container } from '@chakra-ui/react';
 import Image from 'next/image';
-import Container from '../common/Container';
+import Link from 'next/link';
 import Slider from '../Slider';
 import HeaderActions from './HeaderActions';
 
@@ -8,20 +8,18 @@ const Header = () => {
   return (
     <>
       <Box as="header" h="12.375rem" mb="2.625rem" zIndex="999">
-        <Box
-          bgImage="linear-gradient(rgba(255, 255, 255, .9)
-      , rgba(255, 255, 255, .9))"
-          h="4.6875rem"
-          px={10}
-          py={5}
-        >
-          <Container>
-            <Image
-              src="/assets/img/logo.png"
-              alt="رکسو شاپ"
-              height={30}
-              width={102}
-            />
+        <Box as="nav" bg={'white'} h="4.6875rem" px={10} py={5}>
+          <Container maxWidth="1440px" h="100%" mx="auto" pos="relative">
+            <Link href="/">
+              <a>
+                <Image
+                  src="https://res.cloudinary.com/rixso/image/upload/v1661052546/rixsoShop/logos/logo_whdzt5.svg"
+                  alt="رکسو شاپ"
+                  height={32}
+                  width={100}
+                />
+              </a>
+            </Link>
             <HeaderActions />
             <Box
               mt="-10px"
@@ -32,9 +30,7 @@ const Header = () => {
                 display: 'block',
                 width: '100%',
                 height: '146px',
-                backgroundColor: '#DDDFE5',
-                backgroundImage:
-                  'linear-gradient(rgba(255, 255, 255, .9), rgba(255, 255, 255, .9))',
+                backgroundColor: 'white',
                 boxShadow: ' 0px 10px 44px rgba(0, 0, 0, 0.05)',
                 clipPath:
                   'polygon(0 16%, 0 0, 100% 0, 100% 16%,86% 18%, 75% 100%, 25% 100%, 14% 18%)',
