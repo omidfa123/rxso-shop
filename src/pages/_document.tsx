@@ -43,7 +43,7 @@ export default function Document() {
         />
         <link
           rel="preload"
-          href="/fonts/PeydaWeb-Light.woff2"
+          href="/fonts/PeydaWeb-Thin.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
