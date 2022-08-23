@@ -133,7 +133,7 @@ const Slider = () => {
         break;
     }
     store.categoryProducts(selecteCategory!);
-  }, [activeSlide, store, swiper?.realIndex]);
+  }, [activeSlide]);
 
   return (
     <Box

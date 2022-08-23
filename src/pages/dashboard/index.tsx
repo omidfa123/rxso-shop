@@ -50,7 +50,6 @@ import { GetServerSideProps } from 'next';
 import { unstable_getServerSession } from 'next-auth';
 import { authOptions } from 'pages/api/auth/[...nextauth]';
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import {
   DeliveryIcon,
   AddCircleIcon,
@@ -82,13 +81,12 @@ export const Dashboard = ({ userInfo }: { userInfo: Props }) => {
     axios.get('/api/products').then(res => {
       store.setProducts(res.data.data);
     });
-  }, [store]);
+  }, []);
 
   const [fileToUpload, setFileToUpload] = useState<string | File>('');
   const [publicId, setPublicId] = useState('');
   const [image, SetImage] = useState();
   const [activeTab, setActiveTab] = useState(0);
-  const [editorState, setEditorState] = useState();
   const [product, setProduct] = useState({
     name: '',
     description: '',
