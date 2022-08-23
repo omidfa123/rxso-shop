@@ -41,7 +41,7 @@ const Product = () => {
     axios.get('/api/products').then(res => {
       store.setProducts(res.data.data);
     });
-  }, []);
+  }, [store]);
   return (
     <Box w="calc(100% - 334px)" h="100%">
       <SimpleGrid

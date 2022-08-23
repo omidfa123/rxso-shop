@@ -4,7 +4,7 @@ import User from 'server/models/user.model';
 import { userExists } from 'server/services/user.services';
 import { passwordHash } from 'utils/tools';
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function (req: NextApiRequest, res: NextApiResponse) {
   await dbConnect();
   const { email, password, name, image } = req.body;
   const { method } = req;
@@ -37,4 +37,4 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(200).json({ users });
       return;
   }
-};
+}

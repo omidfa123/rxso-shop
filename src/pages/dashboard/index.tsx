@@ -76,24 +76,6 @@ interface Props {
 }
 
 export const Dashboard = ({ userInfo }: { userInfo: Props }) => {
-  const router = useRouter();
-
-  if (userInfo.role !== 'admin') {
-    setTimeout(() => {
-      router.push('/');
-    }, 4000);
-
-    return (
-      <Alert status="error">
-        <AlertIcon />
-        <AlertTitle> کاربر گرامی {userInfo.user.name} </AlertTitle>
-        <AlertDescription>
-          این صفحه مخصوص ادمین هست و شما به آن دسترسی ندارید
-        </AlertDescription>
-      </Alert>
-    );
-  }
-
   const store = useStore();
   const { isOpen, onOpen, onClose } = useDisclosure();
   useEffect(() => {
@@ -308,6 +290,7 @@ export const Dashboard = ({ userInfo }: { userInfo: Props }) => {
                                   src={product.image ?? image}
                                   width={64}
                                   height={64}
+                                  alt={product.name}
                                 />
                               </Box>
                             </Td>
@@ -430,15 +413,13 @@ export const Dashboard = ({ userInfo }: { userInfo: Props }) => {
               <FormControl>
                 <FormLabel htmlFor="title">تصویر کالا</FormLabel>
                 <InputGroup>
-                  <InputLeftElement
-                    children={<AddCircleIcon />}
-                    onClick={handleUpload}
-                  />
+                  <InputLeftElement onClick={handleUpload}>
+                    <AddCircleIcon />
+                  </InputLeftElement>
                   {image && (
-                    <InputRightElement
-                      pointerEvents="none"
-                      children={<Image src={image} width={32} height={32} />}
-                    />
+                    <InputRightElement pointerEvents="none">
+                      <Image src={image} width={32} height={32} alt="" />{' '}
+                    </InputRightElement>
                   )}
                   <Input
                     type="file"
@@ -510,6 +491,14 @@ export default Dashboard;
 export const getServerSideProps: GetServerSideProps = async ({ res, req }) => {
   const session = await unstable_getServerSession(req, res, authOptions);
   if (!session) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    };
+  }
+  if (session.role !== 'admin') {
     return {
       redirect: {
         destination: '/login',

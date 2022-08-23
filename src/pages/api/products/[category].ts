@@ -4,7 +4,7 @@ import { NextApiResponse, NextApiRequest } from 'next';
 
 dbConnect();
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function (req: NextApiRequest, res: NextApiResponse) {
   const { method } = req;
 
   switch (method) {
@@ -33,4 +33,4 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       }
       return;
   }
-};
+}

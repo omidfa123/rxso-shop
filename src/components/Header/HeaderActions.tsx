@@ -29,17 +29,20 @@ const HeaderActions = () => {
   const actionData = [
     {
       label: ['حالت روشن', 'حالت شب'],
-      icon: [<MoonIcon boxSize="34px" />, <SunIcon boxSize="34px" />],
+      icon: [
+        <MoonIcon boxSize="34px" key="MoonIcon" />,
+        <SunIcon boxSize="34px" key="SunIcon" />,
+      ],
       onClick: () => toggleColorMode(),
     },
     {
       label: ['جستجو'],
-      icon: [<SearchIcon boxSize="34px" />],
+      icon: [<SearchIcon boxSize="34px" key="SearchIcon" />],
       onClick: () => onOpen(),
     },
     {
       label: ['ناحیه کاربری'],
-      icon: [<UserIcon boxSize="34px" />],
+      icon: [<UserIcon boxSize="34px" key="UserIcon" />],
       onClick: () => router.push('/login'),
     },
   ];

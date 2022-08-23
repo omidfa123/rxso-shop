@@ -204,7 +204,12 @@ const Footer = () => {
                 <div key={item.name}>
                   <HStack spacing={8} w="100%" pl={6}>
                     <VStack spacing={2}>
-                      <Image src={item.image} height={60} width={60} />
+                      <Image
+                        src={item.image}
+                        height={60}
+                        width={60}
+                        alt={item.name}
+                      />
                       <Text fontSize="xs" color="textsecondary" opacity=".6">
                         {item.category}
                       </Text>
