@@ -24,6 +24,7 @@ interface Iproduct {
   thumbnail: string;
   englishName: string;
   createdAt: string;
+  __v: number;
 }
 
 const Product = () => {
@@ -40,6 +41,7 @@ const Product = () => {
   useEffect(() => {
     axios.get('/api/products').then(res => {
       store.setProducts(res.data.data);
+      store.setSingleProduct(res.data.data[0]);
     });
   }, []);
   return (
@@ -147,6 +149,7 @@ const Product = () => {
               }}
               onClick={() => {
                 store.addToCart(item);
+                store.setCount(item, 'add');
               }}
             >
               افزودن به لیست

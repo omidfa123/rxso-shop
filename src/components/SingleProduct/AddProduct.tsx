@@ -6,11 +6,14 @@ import useStore from 'stores/products';
 const AddProduct = ({
   width,
   showCart,
+  product,
 }: {
   width: string;
   showCart: boolean;
+  product?: any;
 }) => {
   const store = useStore();
+  const selectedIndex = store.cart.findIndex(p => p._id == product?._id);
   return (
     <HStack spacing={4} marginRight="auto !important">
       <Flex
@@ -27,7 +30,7 @@ const AddProduct = ({
           borderRadius="none"
           bgColor="transparent"
           icon={<AddIcon boxSize="24px" />}
-          onClick={() => store.setCount(store.count + 1)}
+          onClick={() => store.setCount(product, 'add')}
         />
         <Flex
           w="46px"
@@ -37,7 +40,7 @@ const AddProduct = ({
           fontWeight="medium"
         >
           <Text as="span" mb="2px">
-            {store.count.toLocaleString('fa-IR')}
+            {store.cart[selectedIndex]?.__v.toLocaleString('fa-IR')}
           </Text>
         </Flex>
         <IconButton
@@ -47,16 +50,16 @@ const AddProduct = ({
           borderRadius="none"
           bgColor="transparent"
           icon={
-            store.count > 1 ? (
+            +store.cart[selectedIndex]?.__v > 1 ? (
               <MinusIcon boxSize="24px" />
             ) : (
               <DeleteIcon boxSize="24px" />
             )
           }
           onClick={() => {
-            store.count === 1
-              ? store.removeFromCart(store.singleProduct)
-              : store.setCount(store.count - 1);
+            store.cart[selectedIndex]?.__v === 1
+              ? store.removeFromCart(product)
+              : store.setCount(product, 'minus');
           }}
         />
       </Flex>

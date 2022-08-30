@@ -11,6 +11,7 @@ interface Iproduct {
   thumbnail: string;
   englishName: string;
   createdAt: string;
+  __v: number;
 }
 
 type Store = {
@@ -19,7 +20,7 @@ type Store = {
   count: number;
   addToCart: (product: Iproduct) => void;
   setIsCartOpen: (isCartOpen: boolean) => void;
-  setCount: (count: number) => void;
+  setCount: (count: any, action: any) => void;
   removeFromCart: (product: Iproduct) => void;
   //
   products: Iproduct[];
@@ -44,12 +45,22 @@ const useStore = create<Store>((set, get) => ({
     set(state => ({ ...state, cart: [...state.cart, product] }));
   },
   removeFromCart: (product: Iproduct) => {
+    console.log(product);
+
     set(state => ({
       ...state,
       cart: state.cart.filter(p => p._id !== product._id),
     }));
   },
-  setCount: (count: number) => set(state => ({ ...state, count })),
+  setCount: (product, action) => {
+    const cart = get().cart;
+    const selected = cart.findIndex(p => p._id == product._id);
+    action == 'add' ? (cart[selected].__v += 1) : (cart[selected].__v -= 1);
+    set(state => ({
+      ...state,
+      cart: [...cart],
+    }));
+  },
   //
   products: [],
   singleProduct: {
@@ -63,6 +74,7 @@ const useStore = create<Store>((set, get) => ({
     thumbnail: '',
     englishName: 'NVIDIA GeForce RTX 2080 Ti Founders Edition',
     createdAt: '',
+    __v: 0,
   },
   originalProducts: [],
   addProduct: (product: Iproduct) => {

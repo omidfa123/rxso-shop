@@ -108,31 +108,31 @@ const Slider = () => {
     },
   ];
   useEffect(() => {
-    let selecteCategory: string;
+    let selectedCategory: string;
     switch (swiper?.realIndex) {
       case 0:
-        selecteCategory = 'motherboard';
+        selectedCategory = 'motherboard';
         break;
       case 1:
-        selecteCategory = 'ram';
+        selectedCategory = 'ram';
         break;
       case 2:
-        selecteCategory = 'hard';
+        selectedCategory = 'hard';
         break;
       case 3:
-        selecteCategory = 'fan';
+        selectedCategory = 'fan';
         break;
       case 4:
-        selecteCategory = 'ssd';
+        selectedCategory = 'ssd';
         break;
       case 5:
-        selecteCategory = 'case';
+        selectedCategory = 'case';
         break;
       case 6:
-        selecteCategory = 'manitor';
+        selectedCategory = 'manitor';
         break;
     }
-    store.categoryProducts(selecteCategory!);
+    store.categoryProducts(selectedCategory!);
   }, [activeSlide]);
 
   return (

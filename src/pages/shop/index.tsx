@@ -1,5 +1,8 @@
+import Head from 'next/head';
+import Footer from 'components/Footer';
+import Header from 'components/Header';
+import Overlay from 'components/common/Overlay';
 import {
-  Box,
   Button,
   Drawer,
   DrawerBody,
@@ -7,24 +10,45 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerOverlay,
-  Flex,
   HStack,
   Select,
   SelectField,
   useDisclosure,
   VStack,
 } from '@chakra-ui/react';
-import { useState } from 'react';
 import { DropdownIcon, FilterIcon } from 'components/common/Icons';
-import Products from '../Product';
-import SingleProduct from '../SingleProduct';
+import Products from 'components/Product';
+import SingleProduct from 'components/SingleProduct';
 import uesStore from 'stores/products';
+import type { GetServerSideProps } from 'next';
 
-const Main = () => {
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  const { category } = query;
+  return {
+    props: {
+      category,
+    },
+  };
+};
+
+const Shop = () => {
   const store = uesStore();
   const { isOpen, onClose, onOpen } = useDisclosure();
   return (
     <>
+      <Head>
+        <title>رکسو شاپ | مرجع خرید قطعات کامپیوتر</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta
+          name="description"
+          content="فروشگاه دیجیتال برای خرید قطعات کامپیوتر"
+        />
+        <meta
+          name="keywords"
+          content="قطعات کامپیوتر, قطعات کامپیوتر خرید, قطعات کامپیوتر برای خرید, اسمبل انلاین"
+        />
+      </Head>
+      <Header />
       <VStack
         as="main"
         h="640px"
@@ -69,6 +93,9 @@ const Main = () => {
           <SingleProduct />
         </HStack>
       </VStack>
+
+      <Footer />
+      <Overlay />
       <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
         <DrawerOverlay />
         <DrawerContent>
@@ -103,4 +130,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default Shop;

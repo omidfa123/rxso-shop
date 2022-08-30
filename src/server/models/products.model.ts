@@ -17,7 +17,6 @@ const productsSchema = new mongoose.Schema({
     type: Number,
     required: [true, 'Price is required'],
   },
-  details: [{ key: String, value: String }],
   special_price: {
     type: Number,
     required: [true, 'Special price is required'],

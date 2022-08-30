@@ -61,7 +61,10 @@ const Footer = () => {
           color="#fff"
           _hover={{ backgroundColor: 'secondary.500' }}
           _active={{ bg: 'secondary.700' }}
-          onClick={() => store.addToCart(store.singleProduct)}
+          onClick={() => {
+            store.addToCart(store.singleProduct);
+            store.setCount(store.singleProduct, 'add');
+          }}
         >
           افزودن به لیست
         </Button>
@@ -74,7 +77,7 @@ const Footer = () => {
           left={'12%'}
           top="-14%"
         >
-          <AddProduct width="140px" showCart />
+          <AddProduct width="140px" showCart product={store.singleProduct} />
         </Box>
         <Box
           h="100%"
@@ -105,7 +108,7 @@ const Footer = () => {
               <Flex alignItems="baseline" gap="2">
                 <Text color="primary.500" fontWeight="bold" fontSize="5xl">
                   {store.cart
-                    .reduce((acc, item) => (acc + item.price) * store.count, 0)
+                    .reduce((acc, item) => acc + item.price * item.__v, 0)
                     .toLocaleString('fa-IR')
                     .replace(/٬/g, '٫')}
                 </Text>
@@ -240,7 +243,7 @@ const Footer = () => {
                         <PriceIcon />
                       </HStack>
                     </VStack>
-                    <AddProduct width="110px" showCart={false} />
+                    <AddProduct width="110px" showCart={false} product={item} />
                   </HStack>
                   <Divider my={7} />
                 </div>
