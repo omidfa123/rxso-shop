@@ -36,8 +36,9 @@ const Product = ({ category }: { category: string }) => {
       }
     });
   };
-  const { isLoading, isError, data } = useQuery(['products'], () =>
-    axios.get('/api/Products')
+  const { isLoading, isError, data } = useQuery<Iproduct[] | any>(
+    ['products'],
+    () => axios.get('/api/Products')
   );
   console.log(isLoading, isError, data);
   console.log(category);
