@@ -79,7 +79,7 @@ const Shop = () => {
           </Button>
         </HStack>
         <HStack h="full" w="full" spacing={6}>
-          <Products />
+          <Products category="ram" />
           <SingleProduct />
         </HStack>
       </VStack>
