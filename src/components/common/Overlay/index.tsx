@@ -12,6 +12,7 @@ const Overlay = () => {
       zIndex={99}
       display={store.isCartOpen ? 'block' : 'none'}
       onClick={() => store.setIsCartOpen(false)}
+      transition="all .3s ease-in-out"
     />
   );
 };

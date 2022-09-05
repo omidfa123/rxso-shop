@@ -156,11 +156,11 @@ export const MinusCircleIcon = (props: IconProps) => (
     <g data-name="Minus">
       <path
         d="M20.664 17h-9.328a1 1 0 1 1 0-2h9.328a1 1 0 0 1 0 2Z"
-        fill="#1e385f"
+        fill="currentColor"
       ></path>
       <path
         d="M16.013 29a13 13 0 1 1 13-13 13.015 13.015 0 0 1-13 13Zm0-24a11 11 0 1 0 11 11 11.012 11.012 0 0 0-11-11Z"
-        fill="#1e385f"
+        fill="currentColor"
       ></path>
     </g>
   </Icon>

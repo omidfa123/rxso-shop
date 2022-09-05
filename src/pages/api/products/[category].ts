@@ -23,7 +23,6 @@ export default async function handler(
     case 'DELETE':
       try {
         const product = await Products.findByIdAndDelete(req.query.category);
-        console.log('product', product);
 
         if (!product) {
           res

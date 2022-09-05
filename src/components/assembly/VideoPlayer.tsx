@@ -13,7 +13,6 @@ const VideoPlayer = () => {
       zIndex={'99'}
       top={[-10, -36, -28]}
       left={[0, 20, '15%']}
-      __css={{ '& div:first-child': { h: 'max-content' } }}
     >
       <ReactPlayer
         url="https://res.cloudinary.com/rixso/video/upload/v1661859817/rixsoShop/landingSlider/game_pzascn.mp4"

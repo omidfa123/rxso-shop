@@ -12,6 +12,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import Price from '../Price';
 import useStore from 'stores/products';
+import AddProduct from './AddProduct';
 
 const SingleProduct = () => {
   const store = useStore();
@@ -122,17 +123,25 @@ const SingleProduct = () => {
           </RadioGroup>
           <Price />
         </Flex>
-        <Button
-          bgColor="secondary.500"
-          fontWeight="semibold"
-          fontSize="xl"
-          color="#fff"
-          display={store.cart.length > 0 ? 'none' : 'block'}
-          _hover={{ backgroundColor: 'secondary.500' }}
-          _active={{ bg: 'secondary.700' }}
-        >
-          افزودن به لیست
-        </Button>
+        {store.cart.length ? (
+          <AddProduct width="140px" showCart product={store.singleProduct} />
+        ) : (
+          <Button
+            top="-9%"
+            bgColor="secondary.500"
+            fontWeight="semibold"
+            fontSize="xl"
+            color="#fff"
+            _hover={{ backgroundColor: 'secondary.500' }}
+            _active={{ bg: 'secondary.700' }}
+            onClick={() => {
+              store.addToCart(store.singleProduct);
+              store.setCount(store.singleProduct, 'add');
+            }}
+          >
+            افزودن به لیست
+          </Button>
+        )}
       </Flex>
     </Flex>
   );

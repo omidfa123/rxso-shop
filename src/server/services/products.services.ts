@@ -1,4 +1,3 @@
-import { unset } from 'lodash';
 import Products from '../models/products.model';
 
 export const productExists = async (productName: string) => {

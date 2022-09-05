@@ -20,10 +20,15 @@ import { DropdownIcon, FilterIcon } from 'components/common/Icons';
 import Products from 'components/Product';
 import SingleProduct from 'components/SingleProduct';
 import uesStore from 'stores/products';
+import dbConnect from 'utils/dbConnect';
+import { getAllProducts } from 'server/services/products.services';
+import { GetStaticPaths, GetStaticProps } from 'next/types';
+import { QueryClient, dehydrate } from '@tanstack/react-query';
 
-const Shop = () => {
+const Shop = ({ category }: { category: any }) => {
   const store = uesStore();
   const { isOpen, onClose, onOpen } = useDisclosure();
+
   return (
     <>
       <Head>
@@ -79,7 +84,7 @@ const Shop = () => {
           </Button>
         </HStack>
         <HStack h="full" w="full" spacing={6}>
-          <Products />
+          <Products category={category} />
           <SingleProduct />
         </HStack>
       </VStack>
@@ -121,3 +126,31 @@ const Shop = () => {
 };
 
 export default Shop;
+
+export const getStaticPaths: GetStaticPaths = () => {
+  const paths = [
+    { params: { category: 'ram' } },
+    { params: { category: 'manitor' } },
+    { params: { category: 'ssd' } },
+    { params: { category: 'hard' } },
+    { params: { category: 'motherboard' } },
+    { params: { category: 'fan' } },
+    { params: { category: 'case' } },
+  ];
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  await dbConnect();
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery(['products'], getAllProducts);
+  return {
+    props: {
+      dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
+      category: params?.category,
+    },
+  };
+};

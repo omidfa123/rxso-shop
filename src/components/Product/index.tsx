@@ -9,10 +9,10 @@ import {
 } from '@chakra-ui/react';
 import axios from 'axios';
 import Image from 'next/image';
-import { useEffect } from 'react';
 import useStore from 'stores/products';
 import { PriceIcon } from 'components/common/Icons';
 import { persianPrice } from 'utils/persianPrice';
+import { useQuery } from '@tanstack/react-query';
 
 interface Iproduct {
   category: string;
@@ -27,9 +27,8 @@ interface Iproduct {
   __v: number;
 }
 
-const Product = () => {
+const Product = ({ category }: { category: string }) => {
   const store = useStore();
-
   const clickHandler = (id: number) => {
     store.products.find((product: Iproduct) => {
       if (product._id === id) {
@@ -37,13 +36,11 @@ const Product = () => {
       }
     });
   };
-
-  useEffect(() => {
-    axios.get('/api/products').then(res => {
-      store.setProducts(res.data.data);
-      store.setSingleProduct(res.data.data[0]);
-    });
-  }, []);
+  const { isLoading, isError, data } = useQuery(['products'], () =>
+    axios.get('/api/Products')
+  );
+  console.log(isLoading, isError, data);
+  console.log(category);
   return (
     <Box w="calc(100% - 334px)" h="100%">
       <SimpleGrid
@@ -79,7 +76,7 @@ const Product = () => {
           },
         }}
       >
-        {store.products.map((item: Iproduct) => (
+        {data?.map((item: Iproduct) => (
           <Flex
             key={item._id}
             flexDir="column"

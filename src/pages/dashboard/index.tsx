@@ -102,7 +102,6 @@ export const Dashboard = ({ userInfo }: { userInfo: Props }) => {
     formData.append('public_id', publicId);
 
     const req = await axios.post('/api/upload', formData);
-    console.log(req.data);
     SetImage(req.data.url);
   };
 

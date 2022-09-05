@@ -45,8 +45,6 @@ const useStore = create<Store>((set, get) => ({
     set(state => ({ ...state, cart: [...state.cart, product] }));
   },
   removeFromCart: (product: Iproduct) => {
-    console.log(product);
-
     set(state => ({
       ...state,
       cart: state.cart.filter(p => p._id !== product._id),
