@@ -17,7 +17,7 @@ import {
 import { useState } from 'react';
 import { useColorMode } from '@chakra-ui/react';
 import { MoonIcon, SunIcon } from 'components/common/Icons';
-import useStore from '../../stores/products';
+import useStore from '../../../store/products';
 import { useRouter } from 'next/router';
 const HeaderActions = () => {
   const router = useRouter();

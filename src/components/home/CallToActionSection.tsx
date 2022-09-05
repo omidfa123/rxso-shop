@@ -136,7 +136,9 @@ export default function CallToActionSection() {
         onClick={() =>
           value
             ? (setIsLoading(true) as any) &
-              (router.push(` /shop/${value}`) as any)
+              (router.push(` /shop/${value}`, undefined, {
+                shallow: true,
+              }) as any)
             : toast({
                 title: 'درخواست نامعتبر',
                 description: 'لطفا نوع کاربری سیستم خود را مشخص کنید',

@@ -7,7 +7,7 @@ import {
   SubtractIcon,
 } from 'components/common/Icons';
 import dynamic from 'next/dynamic';
-const VideoPlayer = dynamic(() => import('../assembly/VideoPlayer'), {
+const VideoPlayer = dynamic(() => import('./VideoPlayer'), {
   ssr: false,
 });
 

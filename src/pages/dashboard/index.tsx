@@ -59,7 +59,7 @@ import {
   DeleteIcon,
 } from 'components/common/Icons';
 import { uniqueId } from 'lodash';
-import useStore from 'stores/products';
+import useStore from 'store/products';
 import Image from 'next/future/image';
 
 type user = {

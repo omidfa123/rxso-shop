@@ -1,10 +1,10 @@
 import { Box, Center, Container, Text } from '@chakra-ui/react';
 import { GetStaticProps } from 'next';
-import LandingSlider from 'components/assembly/LandingSlider';
+import LandingSlider from 'components/home/LandingSlider';
 import Head from 'next/head';
-import Header from 'components/assembly/Header';
-import Features from 'components/assembly/Features';
-import CallToActionSection from 'components/assembly/CallToActionSection';
+import Header from 'components/home/Header';
+import Features from 'components/home/Features';
+import CallToActionSection from 'components/home/CallToActionSection';
 
 const Home = () => {
   return (

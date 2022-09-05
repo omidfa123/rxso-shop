@@ -1,5 +1,5 @@
 import { Badge, Flex, Text } from '@chakra-ui/react';
-import useStore from 'stores/products';
+import useStore from 'store/products';
 import { PriceIcon } from 'components/common/Icons';
 import { persianPrice } from 'utils/persianPrice';
 

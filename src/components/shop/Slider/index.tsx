@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Box, Center, IconButton, Text, VStack } from '@chakra-ui/react';
 import { useEffect, useState, useRef, useMemo } from 'react';
-import useStore from 'stores/products';
+import useStore from 'store/products';
 import 'swiper/css';
 
 import { Swiper as SwiperType } from 'swiper/types';

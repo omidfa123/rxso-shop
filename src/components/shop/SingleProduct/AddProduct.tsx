@@ -1,7 +1,7 @@
 import { AddIcon, MinusIcon } from 'components/common/Icons';
 import { Button, Flex, HStack, IconButton, Text } from '@chakra-ui/react';
 import { DeleteIcon } from 'components/common/Icons';
-import useStore from 'stores/products';
+import useStore from 'store/products';
 
 const AddProduct = ({
   width,

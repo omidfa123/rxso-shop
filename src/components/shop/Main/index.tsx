@@ -1,7 +1,3 @@
-import Head from 'next/head';
-import Footer from 'components/Footer';
-import Header from 'components/Header';
-import Overlay from 'components/common/Overlay';
 import {
   Button,
   Drawer,
@@ -16,29 +12,16 @@ import {
   useDisclosure,
   VStack,
 } from '@chakra-ui/react';
+import uesStore from 'store/products';
 import { DropdownIcon, FilterIcon } from 'components/common/Icons';
-import Products from 'components/Product';
-import SingleProduct from 'components/SingleProduct';
-import uesStore from 'stores/products';
+import Products from 'components/shop/Product';
+import SingleProduct from 'components/shop/SingleProduct';
 
-const Shop = () => {
+export default function Main({ category }: { category: string }) {
   const store = uesStore();
   const { isOpen, onClose, onOpen } = useDisclosure();
   return (
     <>
-      <Head>
-        <title>رکسوشاپ|فروشگاه</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <meta
-          name="description"
-          content="فروشگاه دیجیتال برای خرید قطعات کامپیوتر"
-        />
-        <meta
-          name="keywords"
-          content="قطعات کامپیوتر, قطعات کامپیوتر خرید, قطعات کامپیوتر برای خرید, اسمبل انلاین"
-        />
-      </Head>
-      <Header />
       <VStack
         as="main"
         h="640px"
@@ -78,14 +61,10 @@ const Shop = () => {
             فیلتر محصولات
           </Button>
         </HStack>
-        <HStack h="full" w="full" spacing={6}>
-          <Products category="ram" />
-          <SingleProduct />
-        </HStack>
+
+        <Products category={category} />
       </VStack>
 
-      <Footer />
-      <Overlay />
       <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
         <DrawerOverlay />
         <DrawerContent>
@@ -118,6 +97,4 @@ const Shop = () => {
       </Drawer>
     </>
   );
-};
-
-export default Shop;
+}
