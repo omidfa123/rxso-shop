@@ -11,7 +11,7 @@ export default async function handler(
   await dbConnect();
   const { email, password, name, image } = req.body;
   const { method } = req;
-
+  console.log(process.env.CLIENT_ID);
   switch (method) {
     case 'POST':
       try {

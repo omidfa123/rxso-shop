@@ -1,13 +1,13 @@
-import { Badge, Flex, Text } from '@chakra-ui/react';
+import { Badge, Box, Flex, HStack, Text, VStack } from '@chakra-ui/react';
 import useStore from 'store/products';
 import { PriceIcon } from 'components/common/Icons';
 import { persianPrice } from 'utils/persianPrice';
 
-const Price = () => {
+const Price = ({ price }: { price: number }) => {
   const store = useStore();
   return (
-    <Flex direction="column" gap={2}>
-      <Flex gap={2}>
+    <VStack>
+      <HStack>
         <Text
           textDecoration={'line-through'}
           color="#B6C5DC"
@@ -17,28 +17,25 @@ const Price = () => {
         >
           ۱۹٫۶۳۵٫۰۰۰
         </Text>
-        <Badge
+        <Box
+          as="span"
           bgColor="primary.600"
-          variant="solid"
-          color="#fff"
+          p="3px 9px"
+          rounded="14px"
+          fontSize="11px"
           fontWeight="bold"
-          fontSize="xs"
-          borderRadius={14}
-          padding="0px 10px"
-          display="flex"
-          alignItems="end"
-          justifyContent="end"
+          color="white"
         >
           ۲۰%
-        </Badge>
-      </Flex>
-      <Flex gap={1} alignItems="center">
+        </Box>
+      </HStack>
+      <HStack>
         <Text color="primary.500" fontWeight="bold" fontSize="3xl">
-          {persianPrice(store.singleProduct.price)}
+          {persianPrice(price)}
         </Text>
         <PriceIcon />
-      </Flex>
-    </Flex>
+      </HStack>
+    </VStack>
   );
 };
 

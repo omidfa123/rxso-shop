@@ -21,7 +21,8 @@
     "**/*.ts",
     "**/*.tsx",
     "src/pages/api/auth/[...nextauth].ts",
-    "src/utils/Icons.js"
+    "src/utils/Icons.js",
+    "src/utils/mongoClient.ts"
   ],
   "exclude": ["node_modules"]
 }

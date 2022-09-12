@@ -42,6 +42,7 @@ const Header = () => {
               top="80px"
               pos="absolute"
               right="0"
+              display={{ base: 'none', md: 'block' }}
               filter="url(#round)"
               _before={{
                 content: '""',
@@ -60,6 +61,7 @@ const Header = () => {
             <Box
               top="80px"
               pos="absolute"
+              display={{ base: 'none', md: 'block' }}
               left="0"
               width={'max-content'}
               transform="scaleX(-1)"

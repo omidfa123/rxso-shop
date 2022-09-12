@@ -123,6 +123,8 @@ const Product = ({ category }: { category: string }) => {
                 variant="outline"
                 size="sm"
                 w="full"
+                minH="30px"
+                h="30px"
                 color="secondary.500"
                 borderColor="secondary.500"
                 _hover={{

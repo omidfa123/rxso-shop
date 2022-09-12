@@ -31,19 +31,10 @@ export const Login: NextPage = () => {
     email: '',
     password: '',
   });
-  const { data } = useSession();
-  if (data?.role === 'admin') {
-    router.push('/dashboard');
-  }
-  if (data?.role === 'user') {
-    router.push('/');
-  }
 
   const handleLogin = async () => {
-    const result = await signIn('credentials', {
-      redirect: false,
-      ...loginInfo,
-    });
+    const result = signIn('email', { email: loginInfo.email });
+    console.log(result);
   };
 
   const providers = [
@@ -132,7 +123,7 @@ export const Login: NextPage = () => {
                   <Button
                     key={name}
                     width="full"
-                    onClick={() => signIn('github')}
+                    onClick={() => signIn('google')}
                   >
                     <VisuallyHidden>ثبت‌نام با {name}</VisuallyHidden>
                     {icon}

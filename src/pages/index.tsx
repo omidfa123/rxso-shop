@@ -5,8 +5,11 @@ import Head from 'next/head';
 import Header from 'components/home/Header';
 import Features from 'components/home/Features';
 import CallToActionSection from 'components/home/CallToActionSection';
-
+import { useSession } from 'next-auth/react';
 const Home = () => {
+  const { data, status } = useSession();
+
+  console.log(data, status);
   return (
     <>
       <Head>
