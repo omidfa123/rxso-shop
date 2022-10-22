@@ -151,7 +151,7 @@ export const Dashboard = ({ userInfo }: { userInfo: Props }) => {
             spacing={6}
           >
             <Avatar
-              name={omidfa}
+              name={'omidfa'}
               src="https://res.cloudinary.com/rixso/image/upload/v1660634112/rixsoShop/usersDefault/user-5.png"
               size="lg"
             />
