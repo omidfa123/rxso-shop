@@ -151,8 +151,8 @@ export const Dashboard = ({ userInfo }: { userInfo: Props }) => {
             spacing={6}
           >
             <Avatar
-              name={userInfo.user.name}
-              src={userInfo.user.image}
+              name={omidfa}
+              src="https://res.cloudinary.com/rixso/image/upload/v1660634112/rixsoShop/usersDefault/user-5.png"
               size="lg"
             />
             <VStack spacing={2}>
@@ -163,10 +163,10 @@ export const Dashboard = ({ userInfo }: { userInfo: Props }) => {
                 textTransform="capitalize"
                 letterSpacing={'wide'}
               >
-                {userInfo.user.name}
+                omidfa
               </Text>
               <Text color="#DBE3EF" fontSize="xl" fontWeight="regular">
-                {userInfo.user.email}
+                omidfa@gmail.com
               </Text>
             </VStack>
           </HStack>
@@ -484,27 +484,3 @@ export const Dashboard = ({ userInfo }: { userInfo: Props }) => {
 };
 
 export default Dashboard;
-
-export const getServerSideProps: GetServerSideProps = async ({ res, req }) => {
-  const session = await unstable_getServerSession(req, res, authOptions);
-  if (!session) {
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      },
-    };
-  }
-  if (session.role !== 'admin') {
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: { userInfo: session },
-  };
-};
